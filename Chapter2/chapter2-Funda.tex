@@ -1,0 +1,41 @@
+\chapter{Theory and Fundamentals of Analog to Digital converter}
+
+From Chapter 2 onwards, every chapter should start with an introduction paragraph. This paragraph should brief about the flow of the chapter. This introduction can be limited within 4 to 5 sentences. The chapter heading should be appropriately modified (a sample heading is shown for this chapter).But don't start the introduction paragraph in the chapters 2 to end with "This chapter deals with....". Instead you should bring in the highlights of the chapter in the introduction paragraph.
+
+\section{Contents of this chapter}
+
+This chapter should discuss about the prerequisite learnings before the execution of the project. Organise and elaborate the theory and necessary fundamentals required for the execution of the project. You can use \verb|\subsections| and \verb|subsubsections| in this chapter.
+\section{Contents of this chapter}
+If a specific programming language is required for the project, a section can be allotted in this chapter to discuss it. 
+\section{Contents of this chapter}
+Tools used could be another possible section to discuss about the software tools used in the work. 
+\section{Contents of this chapter}
+The details in this chapter can be added in consultation with the project guide. For an internship based projects, subsections can be modified accordingly. 
+
+\section{Use of Acronyms and Glossaries}
+Acronyms are nothing but the short form of regular repeated word. Say for example, you have a repeat word "Integrated Circuits" and you want to use a short form for it as "IC". For which you have to first define the word and use it wherever you wanted to refer it.
+
+First, let's look at the definition, which has to be entered in \texttt{Glossaries.tex} under \texttt{CoverPages} directory.
+\begin{verbatim}
+%\newacronym{<Ref>}{<Short-Form>}{<Expanded word>}
+\newacronym{ic}{IC}{Integrated Circuits}
+\end{verbatim}
+In order to use the defined acronym, use the commands \verb|\gls{<Ref>}| as shown below
+
+As an example, call the definition with \verb|\gls{ic}| and the outcome of it is reflected as, \gls{ic}.
+
+Note: For the First time, the expanded form appears along with the Short-form definition inside parenthesis. But when the \verb|\gls{}| is repeated, only Short-form appears inside the parenthesis.
+
+Now, let's look at the definition of symbols. Follow the syntax to define the symbol first, inside \texttt{Glossaries.tex} under \texttt{CoverPages} directory.
+\begin{verbatim}
+%\newglossaryentry{<Ref>}{name=<Symbol>, description={<description about the symbol>}, type=<List type>}
+\newglossaryentry{rc}{name=$\tau$, description={Time constant}, type=symbolList}
+\end{verbatim}
+
+As an example, the rate of change is defined with \verb|\gls{rc}| and the outcome of it is reflected as, the rate of change is defined with \gls{rc}.
+
+\vspace{0.75cm}
+
+ \textbf{The chapters should not end with figures, instead bring the paragraph explaining about the figure at the end followed by a summary paragraph.}
+
+After elaborating the various sections of the chapter (From Chapter 2 onwards), a summary paragraph should be written discussing the highlights of that particular chapter. This summary paragraph should not be numbered separately. This paragraph should connect the present chapter to the next chapter.
