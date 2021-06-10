@@ -1,0 +1,6 @@
+# ignore all logs
+*.log
+*.bak
+Main.*
+!Main.pdf
+!Main.tex
