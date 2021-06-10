@@ -20,4 +20,7 @@ This will automatically takes in the values specified in the commands given belo
 ```
  %\MinorProject
 ```
+---
+---
 >Use the youtube play list to know how to use this template: https://youtube.com/playlist?list=PLXnaDu1KFWvaIh-jh9ME8mp5ca-PEtch4
+---
