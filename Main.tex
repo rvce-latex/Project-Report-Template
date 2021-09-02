@@ -69,21 +69,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%Bibliography%%%%%%%%%%%%%%%%%%%%%
-\usepackage[backend=biber,style=ieee]{biblatex}
+\usepackage[backend=bibtex,style=ieee]{biblatex}
 %If backend is set to bibtex, then configure texmaker Bi(La)Tex with "bibtex %"
 \addbibresource{./AuxFiles/ProjectBib.bib}%Add bib file with extention
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%WaterMark%%%%%%%%%%%%%%%%%%%%%
 %%Use it only after Biblatex
-\usepackage[printwatermark]{xwatermark}
-\newwatermark[pages=2-1000,color=gray!50,angle=0,scale=2,xpos=0,ypos=0]{\includegraphics[width=0.3\textwidth]{Figures/RVlogoVecW}}
-
+%\usepackage[printwatermark]{xwatermark}
+%\newwatermark[allpages,color=gray!50,angle=0,scale=2,xpos=0,ypos=0]{\includegraphics[width=0.3\textwidth]{Figures/RVlogoVecW}}
+%\usepackage{background}
+%\backgroundsetup{scale=1, angle=0, firstpage = true, opacity=1, contents={
+%\begin{tikzpicture}[remember picture, overlay]
+%\node at ([yshift=0pt, xshift=0pt]current page.center){\includegraphics[width=0.3\textwidth]{Figures/RV_logoVecW}};
+%\end{tikzpicture}
+%}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
 %\pagestyle{empty}
-%\newpage
+\newpage
 \begin{spacing}{1.5}
 \input{./CoverPages/Certificate}
 \newpage
