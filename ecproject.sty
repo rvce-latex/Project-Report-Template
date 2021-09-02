@@ -3,8 +3,9 @@
 % Author: P Narashimaraja, Assistant Professor, ECE, RVCE
 % Added: \ifMinor in Ver.3.2
 % Fix: spacing issue for 3 guides & 4 students in Ver.3.4
+% Added: \appendix command support in Ver.3.5
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ecproject}[2021/06/04 v.3.4 an project report package for RVCE]
+\ProvidesPackage{ecproject}[2021/09/01 v.3.5 an project report package for RVCE]
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
 \RequirePackage{xifthen}
@@ -320,10 +321,12 @@
 % Define a family for chapter styling keys
 \pgfkeys{/chapter/.is family}
 \pgfkeys{/schapter/.is family}
+\pgfkeys{/apndx/.is family}
 
 \def\pnrset{\pgfqkeys{/chapter}} %Notice this is pgf q keys
 % We define keys for all major components
 \def\cxset{\pgfqkeys{/schapter}}
+\def\apnset{\pgfqkeys{/apndx}}
 
 \pnrset{%
   name/.code={\gdef\chaptername{#1}},
@@ -405,8 +408,71 @@
 % headers and footers
   header style/.store in=\headerstyle@cx,  
 }
-
+% Appendix pgfkey setup
+% Added to Ver.3.5 [01/09/2021]
+\apnset{%
+  name/.code={\gdef\chaptername{#1}},
+%
+  chapter font-family/.store in=\chapterfontfamily@pnr,
+  chapter font-family/.default=\sffamily,
+  chapter font-weight/.store in=\chapterfontweight@pnr,
+  chapter font-size pgone/.store in=\chapterfontsizepgone@pnr,
+  chapter font-size pgtwo/.store in=\chapterfontsizepgtwo@pnr,
+  chapter color/.store in=\chaptercolor@pnr,
+  chapter color/.default=black,
+  chapter before/.store in=\chapterbefore@pnr,
+  chapter after/.store in=\chapterafter@pnr,
+  %
+  number font-family/.store in=\numberfontfamily@pnr,
+  number font-family/.default=\sffamily,
+  number font-weight/.store in=\numberfontweight@pnr,
+  number font-size pgone/.store in=\numberfontsizepgone@pnr,
+  number font-size pgtwo/.store in=\numberfontsizepgtwo@pnr,
+  number color/.store in=\numbercolor@pnr,
+  number color/.default=black,
+  number before/.store in=\numberbefore@pnr,
+  number after/.store in=\numberafter@pnr,
+  % title keys
+  title font-family/.store in=\titlefontfamily@pnr,
+  title font-family/.default=\rmfamily,
+  title font-weight/.store in=\titlefontweight@pnr,
+  title font-size pgone/.store in=\titlefontsizepgone@pnr,
+  title font-size pgtwo/.store in=\titlefontsizepgtwo@pnr,
+  title color/.store in=\titlefontcolor@pnr,
+  title color/.default=black,
+  title before/.store in=\titlebefore@pnr,
+  title after/.store in=\titleafter@pnr,
+  title beforeskip/.store in=\titlebeforeskip@pnr,
+  title afterskip/.store in=\titleafterskip@pnr,
+  %
+  position pgone/.is choice,
+  position pgone/left/.code={\@leftpgonetrue},
+  position pgone/right/.code={\@rightpgonetrue},
+  position pgone/center/.code={\@centerpgonetrue}, 
+  position pgtwo/.is choice,
+  position pgtwo/left/.code={\@leftpgtwotrue},
+  position pgtwo/right/.code={\@rightpgtwotrue},
+  position pgtwo/center/.code={\@centerpgtwotrue},  
+% numbering options that are required
+  numbering/.is choice,
+  numbering/roman/.code={\gdef\thechapter{\@roman\c@chapter}},
+  numbering/Roman/.code={\gdef\thechapter{\@Roman\c@chapter}},
+  numbering/Alphabet/.code={\gdef\thechapter{\@Alph\c@chapter}}, % Added to Ver.3.5 [01/09/2021]
+  numbering/alphabet/.code={\gdef\thechapter{\@alph\c@chapter}}, % Added to Ver.3.5 [01/09/2021]
+  numbering/arabic/.code={\gdef\thechapter{\@arabic\c@chapter}},
+  numbering/none/.code={\gdef\thechapter{}},
+  number dot/.store in=\numberpunctuation@pnr,
+  number position/.is choice,
+  number position/leftname/.code={\@leftnametrue\@rightnamefalse},
+  number position/rightname/.code={\@rightnametrue\@leftnamefalse},
+  number position/absolute/.code={},
+  number position/righttitle/.code={\@righttitletrue},
+  number position/lefttitle/.code={\@lefttitletrue},
+% headers and footers
+  header style/.store in=\headerstyle@pnr,  
+}
 %% This is the Default Chapter tile setting, if \setdefaults is not called inside documnet
+
 \pnrset{%
   name={Chapter},
 %
@@ -444,7 +510,7 @@
   number position=rightname,
   %
   header style=mplain,
-}
+}%\fi
 
 \cxset{%
   title font-family=\rmfamily,
@@ -461,19 +527,23 @@
   header style=fplain,
 }
 
-% One way to define the style and make it global and use it after \mainmatter by calling \setdefaults
-\gdef\setdefaults{%
-\pnrset{%
-  name={Chapter},
-%
+% Redefining the appendix command to suit the pgfkeys setup
+% Added to Ver.3.5 [01/09/2021]
+\gdef\appendix{%
+\setcounter{chapter}{0}
+\apnset{%
+  name={Appendix},
+ %
   chapter font-family=\sffamily,
   chapter font-weight=\bfseries,
-  chapter font-size=\huge,
+  chapter font-size pgone=\Huge,
+  chapter font-size pgtwo=\Large,
   chapter color=gray,
-  chapter before={\leavevmode\par},%need to correct for 0pt
-  chapter after={\leavevmode\par},
+  chapter before=,%{\leavevmode\par},%need to correct for 0pt
+  chapter after=,%{\leavevmode\par},
  % 
-  number font-size=\huge,
+  number font-size pgone=\Huge,
+  number font-size pgtwo=\Large,
   number font-family=\sffamily,
   number font-weight=\bfseries,
   number color=\color{gray},
@@ -482,17 +552,18 @@
   %
   title font-family=\rmfamily,
   title font-weight=\bfseries,
-  title font-size=\Huge,
+  title font-size pgone=\Huge,
+  title font-size pgtwo=\Large,
   title color=\color{purple},
   title after=,
   title before=,
-  title afterskip={\vskip5pt},
-  title beforeskip={\vskip10pt},
+  title afterskip={\vskip0pt},
+  title beforeskip={\vskip0pt},
   %
   position pgone=right,
   position pgtwo=center,
   %
-  numbering=arabic,
+  numbering=Alphabet,
   number dot=,
   number position=rightname,
   %
