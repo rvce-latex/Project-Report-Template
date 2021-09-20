@@ -1,5 +1,5 @@
 # RVCE-Latex-Project-Report-Template
-This is a Latex template is only for RV College of Engineering students for their report writing in latex. You can use this template for both UG and PG mini/main project report writing in Latex.
+This is a Latex template is only for RV College of Engineering students for their report writing in latex. You can use this template for both UG and PG mini/major project report writing in Latex.
 
 The template, by defalut generates UG main project.
 
