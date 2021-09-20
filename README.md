@@ -20,7 +20,13 @@ This will automatically takes in the values specified in the commands given belo
 ```
  %\MinorProject
 ```
-
+## To add Appendix chapter
+Uncomment the following lines in "Main.tex" file
+```
+%\appendix
+%\input{./Appendix/Apndx}%Appendix Chapter 1
+```
+Add contents to ``Apndx.tex`` file under `Appendix` folder
 
 ---
 >Use the youtube play list to know how to use this template: https://youtube.com/playlist?list=PLXnaDu1KFWvaIh-jh9ME8mp5ca-PEtch4
