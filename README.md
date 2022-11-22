@@ -28,6 +28,9 @@ Uncomment the following lines in "Main.tex" file
 ```
 Add contents to ``Apndx.tex`` file under `Appendix` folder
 
+## Further Help
+For further help regarding the setup, follows the [Wiki link](https://github.com/rvce-latex/Project-Report-Template/wiki).
+
 ---
 >Use the youtube play list to know how to use this template: https://youtube.com/playlist?list=PLXnaDu1KFWvaIh-jh9ME8mp5ca-PEtch4
 ---
