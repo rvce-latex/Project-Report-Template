@@ -13,20 +13,12 @@
 \RequirePackage{qrcode}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\subCode}[1]{\gdef\@subCode{#1}}
+\newcommand*{\@subCode}{\texttt{\string\subCode} \texttt{currently not set. Please fix this.}}
 \newcommand*{\academicYear}[1]{\gdef\@acadYear{#1}}
 \newcommand*{\@acadYear}{\texttt{\string\academicYear} \texttt{currently not set. Please fix this.}}
-\newcommand*{\HOD}[1]{\gdef\@hod{#1}}
-\newcommand*{\@hod}{\texttt{\string\HOD} \texttt{currently not set. Please fix this.}}
-\newcommand*{\Principal}[1]{\gdef\@principal{#1}}
-\newcommand*{\@principal}{\texttt{\string\Principal} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberA}[1]{\gdef\@panelMemA{#1}}
-\newcommand*{\@panelMemA}{\texttt{\string\panelMemberA} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberDesigA}[1]{\gdef\@panelMemDesigA{#1}}
-\newcommand*{\@panelMemDesigA}{\texttt{\string\panelMemberDesigA} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberB}[1]{\gdef\@panelMemB{#1}}
-\newcommand*{\@panelMemB}{\texttt{\string\panelMemberB} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberDesigB}[1]{\gdef\@panelMemDesigB{#1}}
-\newcommand*{\@panelMemDesigB}{\texttt{\string\panelMemberDesigB} \texttt{currently not set. Please fix this.}}
+
+% Department & program cmd set
 \newcommand*{\Department}[2][ECE]{\gdef\@departmentSF{#1}\gdef\@departmentLF{#2}}
 \newcommand*{\@departmentSF}{\texttt{Department Name ShortForm is not defined.} \texttt{ Fix this by placing inside square brackets.}}
 \newcommand*{\@departmentLF}{\texttt{Department Name LongForm is not defined.} \texttt{ Fix this by placing inside curly brackets.}}
@@ -36,8 +28,26 @@
 \newcommand*{\pgProgramName}[1]{\gdef\@PGprgName{#1} }
 \newcommand*{\@PGprgName}{\texttt{\string\pgProgramName} \texttt{currently not set. Please fix this.}}
 
+% Panel members cmd set
+\newcommand*{\panelMemberA}[1]{\gdef\@panelMemA{#1}}
+\newcommand*{\@panelMemA}{\texttt{\string\panelMemberA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberDesigA}[1]{\gdef\@panelMemDesigA{#1}}
+\newcommand*{\@panelMemDesigA}{\texttt{\string\panelMemberDesigA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberB}[1]{\gdef\@panelMemB{#1}}
+\newcommand*{\@panelMemB}{\texttt{\string\panelMemberB} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberDesigB}[1]{\gdef\@panelMemDesigB{#1}}
+\newcommand*{\@panelMemDesigB}{\texttt{\string\panelMemberDesigB} \texttt{currently not set. Please fix this.}}
+
+% Esteemed members cmd set
+\newcommand*{\HOD}[1]{\gdef\@hod{#1}}
+\newcommand*{\@hod}{\texttt{\string\HOD} \texttt{currently not set. Please fix this.}}
+\newcommand*{\Principal}[1]{\gdef\@principal{#1}}
+\newcommand*{\@principal}{\texttt{\string\Principal} \texttt{currently not set. Please fix this.}}
+
+% QR code generator
 \newcommand*{\QRurl}[1]{\gdef\@qrurl{#1}}
 \newcommand*{\@qrurl}{\qrset{draft, version=20}}
+
 % initial state: false
 \newif\ifGuideNameBUsed 
 \newif\ifGuideNameCUsed\GuideNameCUsedfalse         
@@ -47,7 +57,7 @@
 \newif\ifPG\PGfalse          % ditto
 \newif\ifDrft\Drftfalse          % ditto
 \newif\ifMinor\Minorfalse          % ditto
-
+% Students cmd set
 \newcommand*{\stuNameA}[1]{\gdef\@stuNameA{#1}}
 \newcommand*{\@stuNameA}{\texttt{\string\stuNameA} \texttt{currently not set. Please fix this.}}
 \newcommand*{\stuUSNA}[1]{\gdef\@stuUSNA{#1}}
@@ -65,6 +75,7 @@
 \newcommand*{\stuUSND}[1]{\gdef\@stuUSND{#1}}
 \newcommand*{\@stuUSND}{}
 
+% Guides cmd set
 \newcommand*{\guideNameA}[1]{\gdef\@guideNameA{#1}}
 \newcommand*{\@guideNameA}{\texttt{\string\guideNameA} \texttt{currently not set. Please fix this.}}
 \newcommand*{\guideDesignationA}[1]{\gdef\@guideDesigA{#1}}
@@ -92,8 +103,13 @@
 \newcommand*{\guideOrgC}[1]{\gdef\@guideOrgC{#1}}
 \newcommand*{\@guideOrgC}{}
 
+\let\pgProgram\PGtrue%
+\let\DraftCopy\Drfttrue%
+\let\MinorProject\Minortrue%
+
 %%%To get the definitions out of package:
 \newcommand*{\printTitle}{\leavevmode\@title}
+\newcommand*{\printCode}{\leavevmode\@subCode}
 \newcommand*{\printAcadYear}{\leavevmode\@acadYear}
 %% Program & Department
 \newcommand*{\printMastersInLF}{\leavevmode\@mastersInLF}
@@ -130,9 +146,7 @@
 \newcommand*{\printStuNameD}{\leavevmode\@stuNameD}
 \newcommand*{\printStuUSND}{\leavevmode\@stuUSND}
 
-\let\pgProgram\PGtrue%
-\let\DraftCopy\Drfttrue%
-\let\MinorProject\Minortrue%
+
 
 %Added: Ver 3.4
 %Added to count the number of lines used in the title - to adjust the spacing of title page
@@ -164,7 +178,7 @@
 {\huge\bfseries\@title\unskip\strut\par \global\titlelines=\the\prevgraf}% To count the number of lines used in the title - to adjust the spacing of title page
 \setcounter{numtitlelines}{\the\titlelines}
 \vspace{1cm}
-{\Large\itshape A Major Project Report (18EC81)\unskip\strut\par}
+{\Large\itshape A \ifMinor Minor \else Major \fi Project Report (\@subCode)\unskip\strut\par}
 \vspace{0.25cm}
 {\Large\bfseries Submitted by,\unskip\strut\par}
 \end{center}
