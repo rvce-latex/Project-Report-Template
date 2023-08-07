@@ -270,7 +270,12 @@
     \fancyhf{}%                            
     \renewcommand{\headrulewidth}{0.2pt}%    
     \renewcommand{\footrulewidth}{0.2pt}%
-    \fancyfoot[L] {\ifPG \@mastersInSF\, in \@PGprgName, Department of \@departmentSF \else Department of \@departmentLF\fi,\space\@acadYear}%
+    \ifPG
+    \fancyfoot[C] {\@mastersInSF\, in \@PGprgName, Department of \@departmentSF,\space\@acadYear}%
+    \else
+    \fancyfoot[L] {UG\space\ifMinor Minor\else Major\fi\space Project Report}%
+    \fancyfoot[C] {Department of \@departmentSF,\space\@acadYear}%
+    \fi
     \fancyfoot[R] {\thepage}%
     \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
 }
@@ -278,8 +283,14 @@
     \fancyhf{}%                            
     \renewcommand{\headrulewidth}{0.2pt}%    
     \renewcommand{\footrulewidth}{0.2pt}%
-    \fancyfoot[C] {\ifPG \@mastersInSF\, in \@PGprgName, Department of \@departmentSF \else Department of \@departmentLF\fi,\space\@acadYear}%
+    \ifPG
+    \fancyfoot[C] {\@mastersInSF\, in \@PGprgName, Department of \@departmentSF,\space\@acadYear}%
     \fancyfoot[R] {}%
+    \else
+    \fancyfoot[L] {UG\space\ifMinor Minor\else Major\fi\space Project Report}%
+    \fancyfoot[C] {Department of \@departmentSF}%
+    \fancyfoot[R] {\@acadYear}%
+    \fi    
     \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
 }
 \fancypagestyle{fplain}{%              

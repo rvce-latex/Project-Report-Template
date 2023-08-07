@@ -2,14 +2,14 @@
 
 \input{./AuxFiles/Packages}
 
-%Document settings
+%% Document settings
 \title{Design and Analysis of Oversampling ADC}
 \subCode{18EC81}
 %%%%%%%%%%%%%%%Minor (or) Major report%%%%%%%%%%%%%%%
-%Uncomment \MinorProject line, if the report is for Minor project.
+%% Uncomment \MinorProject line, if the report is for Minor project.
 %\MinorProject
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%Student Details%%%
+%% Student Details%%%
 \stuNameA{P Narashimaraja}
 \stuUSNA{1RV16EC005}
 %\stuNameB{Nithin M}
@@ -19,7 +19,7 @@
 %\stuNameD{Subrahmanya K N}
 %\stuUSND{1RV16EC007}
 
-%%%Internal Guide%%%%
+%% Internal Guide%%%%
 \guideNameA{Mr. Ramavenkateshwaran}
 \guideDesignationA{Assistant Professor}
 \guideDeptA{Dept. of ECE}
@@ -51,39 +51,41 @@
 \QRurl{}
 %\QRurl{https://drive.google.com/open?id=1jm-POmuq-ZZ1tT5m-xAdCDRnwvLZH8q-}
 %%%%%%%%%%%%%%%%%%%For PG program%%%%%%%%%%%%%%%%%%%
-%%%Uncomment \pgProgram command and define appropriate values for \MastersIn{} and \pgProgramName{}
+%% Uncomment \pgProgram command and define appropriate values for \MastersIn{} and \pgProgramName{}
 
 %\pgProgram%
 \MastersIn[M.Tech]{Master of Technology}
 \pgProgramName{VLSI Design \& Embedded Systems}
 
 %%%%%%%%%%%%%%%%%%Draft report%%%%%%%%%%%%%%%%%%
-\DraftCopy
+\DraftCopy %Not yet implemented, if anyone interested, do contact me at pnarashimaraja@rvce.edu.in (or) narashimaraja@gmail.com
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%Acronyms%%%%%%%%%%%%%%%%%%
 \newglossary[sym]{symbolList}{sym1}{sym2}{List of Symbols}
 \makeglossaries
-%Acronyms
+% Acronyms
 \loadglsentries{./AuxFiles/Glossaries}
 \renewcommand{\glspostdescription}{}% To remove dot at the end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%Bibliography%%%%%%%%%%%%%%%%%%%%%
 \usepackage[backend=bibtex,style=ieee]{biblatex}
-%If backend is set to bibtex, then configure texmaker Bi(La)Tex with "bibtex %"
+% If backend is set to bibtex, then configure texmaker Bi(La)Tex with "bibtex %"
 \addbibresource{./AuxFiles/ProjectBib.bib}%Add bib file with extention
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%WaterMark%%%%%%%%%%%%%%%%%%%%%
-%Use it only after Biblatex
-%\usepackage{background}
-%\backgroundsetup{scale=1, angle=0, firstpage = true, opacity=1, contents={
-%\begin{tikzpicture}[remember picture, overlay]
-%\node at ([yshift=0pt, xshift=0pt]current page.center){\includegraphics[width=0.6\textwidth]{Figures/RVlogoVecW}};
-%\end{tikzpicture}
-%}}
+%% Use it only after Biblatex
+%% Uncomment the following lines for watermarking and run it more than 2 times for proper alignment
+\usepackage{background}
+\backgroundsetup{scale=1, angle=0, firstpage = true, opacity=1, contents={
+\begin{tikzpicture}[remember picture, overlay]
+\node at ([yshift=0pt, xshift=0pt]current page.center){\includegraphics[width=0.6\textwidth]{Figures/RVlogoVecW}};
+\end{tikzpicture}
+}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 \maketitle
 %\pagestyle{empty}
