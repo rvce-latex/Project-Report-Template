@@ -50,8 +50,10 @@
 \newcommand*{\@qrurl}{\qrset{draft, version=20}}
 
 % initial state: false
-\newif\ifGuideNameBUsed 
-\newif\ifGuideNameCUsed\GuideNameCUsedfalse         
+\newif\ifGuideNameBUsed
+\newif\ifGuideNameCUsed\GuideNameCUsedfalse
+\newif\ifProjectMemBUsed\ProjectMemBUsedfalse
+\newif\ifProjectMemCUsed\ProjectMemCUsedfalse
 \newif\ifStuNameBUsed           % ditto
 \newif\ifStuNameCUsed           % ditto
 \newif\ifStuNameDUsed           % ditto
@@ -104,6 +106,23 @@
 \newcommand*{\guideOrgC}[1]{\gdef\@guideOrgC{#1}}
 \newcommand*{\@guideOrgC}{}
 
+% Added:Ver 3.6
+% Project Co-ordinates member cmd set
+\newcommand*{\projectMemberA}[1]{\gdef\@projectMemA{#1}}
+\newcommand*{\@projectMemA}{\texttt{\string\projectMemberA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\projectMemberDesigA}[1]{\gdef\@projectMemDesigA{#1}}
+\newcommand*{\@projectMemDesigA}{\texttt{\string\projectMemberDesigA} \texttt{currently not set. Please fix this.}}
+
+\newcommand*{\projectMemberB}[1]{\gdef\@projectMemB{#1}\global\ProjectMemBUsedtrue}
+\newcommand*{\@projectMemB}{}
+\newcommand*{\projectMemberDesigB}[1]{\gdef\@projectMemDesigB{#1}}
+\newcommand*{\@projectMemDesigB}{}
+
+\newcommand*{\projectMemberC}[1]{\gdef\@projectMemC{#1}\global\ProjectMemCUsedtrue}
+\newcommand*{\@projectMemC}{}
+\newcommand*{\projectMemberDesigC}[1]{\gdef\@projectMemDesigC{#1}}
+\newcommand*{\@projectMemDesigC}{}
+
 \let\pgProgram\PGtrue%
 \let\DraftCopy\Drfttrue%
 \let\MinorProject\Minortrue%
@@ -146,8 +165,14 @@
 \newcommand*{\printStuUSNC}{\leavevmode\@stuUSNC}
 \newcommand*{\printStuNameD}{\leavevmode\@stuNameD}
 \newcommand*{\printStuUSND}{\leavevmode\@stuUSND}
-
-
+% Added:Ver 3.6
+%%Project co-ordinator Names
+\newcommand*{\printProjectMemberA}{\leavevmode\@projectMemA}
+\newcommand*{\printProjectMemberDesigA}{\leavevmode\@projectMemDesigA}
+\newcommand*{\printProjectMemberB}{\leavevmode\@projectMemB}
+\newcommand*{\printProjectMemberDesigB}{\leavevmode\@projectMemDesigB}
+\newcommand*{\printProjectMemberC}{\leavevmode\@projectMemC}
+\newcommand*{\printProjectMemberDesigC}{\leavevmode\@projectMemDesigC}
 
 %Added: Ver 3.4
 %Added to count the number of lines used in the title - to adjust the spacing of title page
