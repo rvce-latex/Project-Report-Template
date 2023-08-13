@@ -79,7 +79,7 @@
 %% Use it only after Biblatex
 %% Uncomment the following lines for watermarking and run it more than 2 times for proper alignment
 \usepackage{background}
-\backgroundsetup{scale=1, angle=0, firstpage = true, opacity=1, contents={
+\backgroundsetup{scale=1, angle=0, firstpage = false, opacity=1, contents={
 \begin{tikzpicture}[remember picture, overlay]
 \node at ([yshift=0pt, xshift=0pt]current page.center){\includegraphics[width=0.6\textwidth]{Figures/RVlogoVecW}};
 \end{tikzpicture}
@@ -87,6 +87,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
 \maketitle
 %\pagestyle{empty}
 \newpage

@@ -11,6 +11,7 @@
 \RequirePackage{xifthen}
 \RequirePackage{fancyhdr}
 \RequirePackage{qrcode}
+\RequirePackage{background}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand*{\subCode}[1]{\gdef\@subCode{#1}}
@@ -164,6 +165,8 @@
 %%%%%% Title Page %%%%%%%%%%%
 \renewcommand*{\maketitle}{%
 \begin{titlepage}
+%Added in Ver 3.6 [13/08/2023]
+\NoBgThispage
 \begin{tikzpicture}[remember picture, overlay]
   \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
