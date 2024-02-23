@@ -26,11 +26,15 @@ Uncomment the following lines in "Main.tex" file
 %\appendix
 %\input{./Appendix/Apndx}%Appendix Chapter 1
 ```
+<<<<<<< HEAD
 Add contents to ``Apndx.tex`` file under `Appendix` folder.
 
 ## To access old Project template with old Logos
 You can access the older versions from the side pannel under Releases. You might probably use `v3.6` `Version 3.6 (31 Jan 2024)` release.
 
+=======
+Add contents to ``Apndx.tex`` file under `Appendix` folder
+>>>>>>> 48ae6304b7581ac59d7c8150597ae0b39cb446bf
 
 ## Further Help
 For further help regarding the setup, follows the [Wiki link](https://github.com/rvce-latex/Project-Report-Template/wiki).
