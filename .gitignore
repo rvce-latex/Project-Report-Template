@@ -1,0 +1,8 @@
+# ignore all logs
+*.log
+*.bak
+Main.*
+!Main.pdf
+!Main.tex
+CODE_OF_CONDUCT.md
+

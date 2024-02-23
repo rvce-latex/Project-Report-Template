@@ -1,0 +1,168 @@
+\documentclass[12pt,oneside,a4paper]{book} % This style for A4 format.
+
+\input{./AuxFiles/Packages}
+
+%% Document settings
+\title{Design and Analysis of Oversampling ADC}
+\subCode{18EC81}
+%%%%%%%%%%%%%%%Minor (or) Major report%%%%%%%%%%%%%%%
+%% Uncomment \MinorProject line, if the report is for Minor project.
+%\MinorProject
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Student Details%%%
+\stuNameA{P Narashimaraja}
+\stuUSNA{1RV16EC005}
+%\stuNameB{Nithin M}
+%\stuUSNB{1RV16EC006}
+%\stuNameC{Subrahmanya K N}
+%\stuUSNC{1RV16EC007}
+%\stuNameD{Subrahmanya K N}
+%\stuUSND{1RV16EC007}
+
+%% Internal Guide%%%%
+\guideNameA{Mr. Ramavenkateshwaran}
+\guideDesignationA{Assistant Professor}
+\guideDeptA{Dept. of ECE}
+\guideOrgA{RV College of Engineering}
+
+%%%External Guide%%%%
+%\guideNameB{Dr. Ramavenkateshwaran}
+%\guideDesignationB{Assistant Professor}
+%\guideDeptB{Dept. of ECE}
+%\guideOrgB{RV College of Engineering}
+
+%\guideNameC{Dr. Ramavenkateshwaran}
+%\guideDesignationC{Assistant Professor}
+%\guideDeptC{Dept. of ECE}
+%\guideOrgC{RV College of Engineering}
+
+\panelMemberA{Dr. Kariyappa}
+\panelMemberDesigA{Professor}
+\panelMemberB{Prof. P N Jayanthi}
+\panelMemberDesigB{Assistant Professor}
+
+% Added Ver 3.6
+%% Project co-ordonators
+\projectMemberA{Dr. Veena Devi S V}
+\projectMemberDesigA{Associate Professor}
+\projectMemberB{Prof. Sindhu Rajendran}
+\projectMemberDesigB{Assistant Professor}
+\projectMemberC{Prof. Subramanya K N}
+\projectMemberDesigC{Assistant Professor}
+
+
+\Department[ECE]{Electronics and Communication Engineering}
+
+\HOD{Dr. K S Geetha}
+\Principal{Dr. K. N. Subramanya}
+
+\academicYear{2023-24}
+
+\QRurl{}
+%\QRurl{https://drive.google.com/open?id=1jm-POmuq-ZZ1tT5m-xAdCDRnwvLZH8q-}
+%%%%%%%%%%%%%%%%%%%For PG program%%%%%%%%%%%%%%%%%%%
+%% Uncomment \pgProgram command and define appropriate values for \MastersIn{} and \pgProgramName{}
+
+%\pgProgram%
+\MastersIn[M.Tech]{Master of Technology}
+\pgProgramName{VLSI Design \& Embedded Systems}
+
+%%%%%%%%%%%%%%%%%%Draft report%%%%%%%%%%%%%%%%%%
+\DraftCopy %Not yet implemented, if anyone interested, do contact me at pnarashimaraja@rvce.edu.in (or) narashimaraja@gmail.com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%Acronyms%%%%%%%%%%%%%%%%%%
+\newglossary[sym]{symbolList}{sym1}{sym2}{List of Symbols}
+\makeglossaries
+% Acronyms
+\loadglsentries{./AuxFiles/Glossaries}
+\renewcommand{\glspostdescription}{}% To remove dot at the end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%Bibliography%%%%%%%%%%%%%%%%%%%%%
+\usepackage[backend=bibtex,style=ieee]{biblatex}
+% If backend is set to bibtex, then configure texmaker Bi(La)Tex with "bibtex %"
+\addbibresource{./AuxFiles/ProjectBib.bib}%Add bib file with extention
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%WaterMark%%%%%%%%%%%%%%%%%%%%%
+%% Use it only after Biblatex
+%% Uncomment the following lines for watermarking and run it more than 2 times for proper alignment
+\usepackage{background}
+\backgroundsetup{scale=1, angle=0, firstpage = false, opacity=1, contents={
+\begin{tikzpicture}[remember picture, overlay]
+\node at ([yshift=0pt, xshift=0pt]current page.center){\includegraphics[width=0.6\textwidth]{Figures/RVlogoVecW}};
+\end{tikzpicture}
+}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\NoBgThispage% Don't remove this command, even if you want logo on the first page.	
+\maketitle
+%\pagestyle{empty}
+\newpage
+\begin{spacing}{1.5}
+\input{./CoverPages/Certificate}
+\newpage
+\input{./CoverPages/Declaration}
+\newpage
+\input{./CoverPages/Ack}
+\newpage
+\pagenumbering{roman}
+\chapter*{Abstract}
+\input{./CoverPages/Abstract}
+\end{spacing}
+\newpage
+\pagestyle{fplain}
+\begin{spacing}{1.5}
+	\tableofcontents	
+\end{spacing}
+\newpage
+\begin{spacing}{1.5}
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{\listfigurename}
+	\listoffigures	
+\end{spacing}
+\newpage
+\begin{spacing}{1.5}
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{\listtablename}
+	\listoftables	
+\end{spacing}
+\newpage
+\printglossary[type=\acronymtype, title= Abbreviations, toctitle=Abbreviations]
+\newpage
+\printglossary[type=symbolList, title= List of Symbols, toctitle=List of Symbols]
+
+\mainmatter
+\pagestyle{mplain}
+\glsresetall
+\begin{spacing}{1.5}
+%Chapter 1 
+\input{./Chapter1/chapter1-Intro}
+
+%Chapter 2
+\input{./Chapter2/chapter2-Funda}
+
+%Chapter 3
+\input{./Chapter3/chapter3-design}
+
+%Chapter 4
+\input{./Chapter4/chapter4-implement}
+
+%Chapter 5
+\input{./Chapter5/chapter5-result}
+
+%Chapter 6
+\input{./Chapter6/chapter6-conclution}
+
+%% Uncomment the following 2 commands to add Appendix chapters
+\appendix
+\input{./Appendix/Apndx}%Appendix Chapter 1
+
+\backmatter
+\clearpage
+\printbibliography%
+
+\end{spacing}
+\end{document}

@@ -1,0 +1,58 @@
+%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCE
+%%Border
+\begin{tikzpicture}[remember picture, overlay]
+  \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
+\end{tikzpicture}
+
+\thispagestyle{empty}
+
+\begin{center}
+\Large\textbf{\underline{DECLARATION}} \par
+\end{center}
+
+
+\noindent \ifPG I \else \ifStuNameBUsed We\else I\fi\fi, \textbf{\printStuNameA} \ifPG \else\ifStuNameBUsed  \ifStuNameCUsed ,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameB} \ifStuNameCUsed  \ifStuNameDUsed ,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameC}$\,$ \ifStuNameDUsed and $\,$ \textbf{\printStuNameD}$\,$ \fi \fi \fi \fi students of \ifPG \ifMinor {third\;} \else {fourth\;} \fi \else \ifMinor{sixth\;}\else{eighth\;}\fi \fi semester \ifPG \printMastersInSF\, in \printMastersPrgName \else B.E.\fi, Department of \printDepartmentLF, RV College of Engineering, Bengaluru, hereby declare that the \ifMinor{minor\;}\else{ major\;}\fi project titled `\textbf{\printTitle}' has been carried out by \ifStuNameBUsed us \else me \fi and submitted in partial fulfilment for the award of degree of \ifPG \textbf{\printMastersInLF} in \textbf{\printMastersPrgName} \else\textbf{Bachelor of Engineering} in \textbf{\printDepartmentLF} \fi during the year \printAcadYear.\\ \par
+
+\noindent Further \ifPG I \else\ifStuNameBUsed we \else I \fi \fi declare that the content of the dissertation has not been submitted previously by anybody for the award of any degree or diploma to any other university.\\ \par
+
+\noindent \ifPG I \else\ifStuNameBUsed We \else I \fi \fi also declare that any Intellectual Property Rights generated out of this project carried out at RVCE will be the property of RV College of Engineering, Bengaluru and we will be one of the authors of the same.
+
+\vspace{1cm}
+\noindent Place: Bengaluru\par
+\vspace{0.5cm}
+\noindent Date: \par
+
+\vspace{2cm}
+\begin{table}[H]
+\centering
+%\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcp{5cm}cc}
+&&&&&\\
+&&&&&\\
+&Name  &&& Signature& \\
+&&&&&\\
+1.&\printStuNameA (\printStuUSNA)&&&&\\
+&&&&&\\
+\ifPG% 
+\else%
+\ifStuNameBUsed%
+2.&\printStuNameB (\printStuUSNB)&&&&\\
+&&&&&\\
+\else%
+\fi%
+\ifStuNameCUsed%
+3.&\printStuNameC (\printStuUSNC)&&&&\\
+&&&&&\\
+\else%
+\fi%
+\ifStuNameDUsed%
+4.&\printStuNameD (\printStuUSND)&&&&\\
+&&&&&\\
+\else%
+\fi%
+\fi%
+\end{tabular}%
+%}
+\end{table}
+%\pagebreak
+

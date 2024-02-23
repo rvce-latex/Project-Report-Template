@@ -1,0 +1,794 @@
+% Copyright note: This package defines how titles should
+% be typeset at the RV College of Engineering
+% Author: P Narashimaraja, Assistant Professor, ECE, RVCE
+% Added: \ifMinor in Ver.3.2
+% Fix: spacing issue for 3 guides & 4 students in Ver.3.4
+% Added: \appendix command support in Ver.3.5
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ecproject}[2021/09/01 v.3.5 an project report package for RVCE]
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{xifthen}
+\RequirePackage{fancyhdr}
+\RequirePackage{qrcode}
+\RequirePackage{background}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\subCode}[1]{\gdef\@subCode{#1}}
+\newcommand*{\@subCode}{\texttt{\string\subCode} \texttt{currently not set. Please fix this.}}
+\newcommand*{\academicYear}[1]{\gdef\@acadYear{#1}}
+\newcommand*{\@acadYear}{\texttt{\string\academicYear} \texttt{currently not set. Please fix this.}}
+
+% Department & program cmd set
+\newcommand*{\Department}[2][ECE]{\gdef\@departmentSF{#1}\gdef\@departmentLF{#2}}
+\newcommand*{\@departmentSF}{\texttt{Department Name ShortForm is not defined.} \texttt{ Fix this by placing inside square brackets.}}
+\newcommand*{\@departmentLF}{\texttt{Department Name LongForm is not defined.} \texttt{ Fix this by placing inside curly brackets.}}
+\newcommand*{\MastersIn}[2][M.Tech]{\gdef\@mastersInSF{#1}\relax \def\@mastersInLF{#2}\relax}
+\newcommand*{\@mastersInSF}{\texttt{Masters ShortForm is not defined.} \texttt{ Fix this by placing inside square brackets.}}
+\newcommand*{\@mastersInLF}{\texttt{Masters LongForm is not defined.} \texttt{ Fix this by placing inside curly brackets.}}
+\newcommand*{\pgProgramName}[1]{\gdef\@PGprgName{#1} }
+\newcommand*{\@PGprgName}{\texttt{\string\pgProgramName} \texttt{currently not set. Please fix this.}}
+
+% Panel members cmd set
+\newcommand*{\panelMemberA}[1]{\gdef\@panelMemA{#1}}
+\newcommand*{\@panelMemA}{\texttt{\string\panelMemberA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberDesigA}[1]{\gdef\@panelMemDesigA{#1}}
+\newcommand*{\@panelMemDesigA}{\texttt{\string\panelMemberDesigA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberB}[1]{\gdef\@panelMemB{#1}}
+\newcommand*{\@panelMemB}{\texttt{\string\panelMemberB} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberDesigB}[1]{\gdef\@panelMemDesigB{#1}}
+\newcommand*{\@panelMemDesigB}{\texttt{\string\panelMemberDesigB} \texttt{currently not set. Please fix this.}}
+
+% Esteemed members cmd set
+\newcommand*{\HOD}[1]{\gdef\@hod{#1}}
+\newcommand*{\@hod}{\texttt{\string\HOD} \texttt{currently not set. Please fix this.}}
+\newcommand*{\Principal}[1]{\gdef\@principal{#1}}
+\newcommand*{\@principal}{\texttt{\string\Principal} \texttt{currently not set. Please fix this.}}
+
+% QR code generator
+\newcommand*{\QRurl}[1]{\gdef\@qrurl{#1}}
+\newcommand*{\@qrurl}{\qrset{draft, version=20}}
+
+% initial state: false
+\newif\ifGuideNameBUsed
+\newif\ifGuideNameCUsed\GuideNameCUsedfalse
+\newif\ifProjectMemBUsed\ProjectMemBUsedfalse
+\newif\ifProjectMemCUsed\ProjectMemCUsedfalse
+\newif\ifStuNameBUsed           % ditto
+\newif\ifStuNameCUsed           % ditto
+\newif\ifStuNameDUsed           % ditto
+\newif\ifPG\PGfalse          % ditto
+\newif\ifDrft\Drftfalse          % ditto
+\newif\ifMinor\Minorfalse          % ditto
+% Students cmd set
+\newcommand*{\stuNameA}[1]{\gdef\@stuNameA{#1}}
+\newcommand*{\@stuNameA}{\texttt{\string\stuNameA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\stuUSNA}[1]{\gdef\@stuUSNA{#1}}
+\newcommand*{\@stuUSNA}{\texttt{\string\stuUSNA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\stuNameB}[1]{\gdef\@stuNameB{#1}\global\StuNameBUsedtrue}
+\newcommand*{\@stuNameB}{}
+\newcommand*{\stuUSNB}[1]{\gdef\@stuUSNB{#1}}
+\newcommand*{\@stuUSNB}{}
+\newcommand*{\stuNameC}[1]{\gdef\@stuNameC{#1}\global\StuNameCUsedtrue}
+\newcommand*{\@stuNameC}{}
+\newcommand*{\stuUSNC}[1]{\gdef\@stuUSNC{#1}}
+\newcommand*{\@stuUSNC}{}
+\newcommand*{\stuNameD}[1]{\gdef\@stuNameD{#1}\global\StuNameDUsedtrue}
+\newcommand*{\@stuNameD}{}
+\newcommand*{\stuUSND}[1]{\gdef\@stuUSND{#1}}
+\newcommand*{\@stuUSND}{}
+
+% Guides cmd set
+\newcommand*{\guideNameA}[1]{\gdef\@guideNameA{#1}}
+\newcommand*{\@guideNameA}{\texttt{\string\guideNameA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\guideDesignationA}[1]{\gdef\@guideDesigA{#1}}
+\newcommand*{\@guideDesigA}{\texttt{\string\guideDesignationA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\guideOrgA}[1]{\gdef\@guideOrgA{#1}}
+\newcommand*{\@guideOrgA}{\texttt{\string\guideOrgA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\guideDeptA}[1]{\gdef\@guideDeptA{#1}}
+\newcommand*{\@guideDeptA}{\texttt{\string\guideDeptA} \texttt{currently not set. Please fix this.}}
+
+\newcommand*{\guideNameB}[1]{\gdef\@guideNameB{#1}\global\GuideNameBUsedtrue}
+\newcommand*{\@guideNameB}{}
+\newcommand*{\guideDesignationB}[1]{\gdef\@guideDesigB{#1}}
+\newcommand*{\@guideDesignationB}{}
+\newcommand*{\guideDeptB}[1]{\gdef\@guideDeptB{#1}}
+\newcommand*{\@guideDeptB}{}
+\newcommand*{\guideOrgB}[1]{\gdef\@guideOrgB{#1}}
+\newcommand*{\@guideOrgB}{}
+
+\newcommand*{\guideNameC}[1]{\gdef\@guideNameC{#1}\global\GuideNameCUsedtrue}
+\newcommand*{\@guideNameC}{}
+\newcommand*{\guideDesignationC}[1]{\gdef\@guideDesigC{#1}}
+\newcommand*{\@guideDesignationC}{}
+\newcommand*{\guideDeptC}[1]{\gdef\@guideDeptC{#1}}
+\newcommand*{\@guideDeptC}{}
+\newcommand*{\guideOrgC}[1]{\gdef\@guideOrgC{#1}}
+\newcommand*{\@guideOrgC}{}
+
+% Added:Ver 3.6
+% Project Co-ordinates member cmd set
+\newcommand*{\projectMemberA}[1]{\gdef\@projectMemA{#1}}
+\newcommand*{\@projectMemA}{\texttt{\string\projectMemberA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\projectMemberDesigA}[1]{\gdef\@projectMemDesigA{#1}}
+\newcommand*{\@projectMemDesigA}{\texttt{\string\projectMemberDesigA} \texttt{currently not set. Please fix this.}}
+
+\newcommand*{\projectMemberB}[1]{\gdef\@projectMemB{#1}\global\ProjectMemBUsedtrue}
+\newcommand*{\@projectMemB}{}
+\newcommand*{\projectMemberDesigB}[1]{\gdef\@projectMemDesigB{#1}}
+\newcommand*{\@projectMemDesigB}{}
+
+\newcommand*{\projectMemberC}[1]{\gdef\@projectMemC{#1}\global\ProjectMemCUsedtrue}
+\newcommand*{\@projectMemC}{}
+\newcommand*{\projectMemberDesigC}[1]{\gdef\@projectMemDesigC{#1}}
+\newcommand*{\@projectMemDesigC}{}
+
+\let\pgProgram\PGtrue%
+\let\DraftCopy\Drfttrue%
+\let\MinorProject\Minortrue%
+
+%%%To get the definitions out of package:
+\newcommand*{\printTitle}{\leavevmode\@title}
+\newcommand*{\printCode}{\leavevmode\@subCode}
+\newcommand*{\printAcadYear}{\leavevmode\@acadYear}
+%% Program & Department
+\newcommand*{\printMastersInLF}{\leavevmode\@mastersInLF}
+\newcommand*{\printMastersInSF}{\leavevmode\@mastersInSF}
+\newcommand*{\printMastersPrgName}{\leavevmode\@PGprgName}
+
+\newcommand*{\printDepartmentSF}{\leavevmode\@departmentSF}
+\newcommand*{\printDepartmentLF}{\leavevmode\@departmentLF}
+%% Principal & HOD Name
+\newcommand*{\printPrincipal}{\leavevmode\@principal}
+\newcommand*{\printHOD}{\leavevmode\@hod}
+%%Guide Name
+\newcommand*{\printGuideNameA}{\leavevmode\@guideNameA}
+\newcommand*{\printGuideDesigA}{\leavevmode\@guideDesigA}
+\newcommand*{\printGuideOrgA}{\leavevmode\@guideOrgA}
+\newcommand*{\printGuideNameB}{\leavevmode\@guideNameB}
+\newcommand*{\printGuideDesigB}{\leavevmode\@guideDesigB}
+\newcommand*{\printGuideOrgB}{\leavevmode\@guideOrgB}
+\newcommand*{\printGuideNameC}{\leavevmode\@guideNameC}
+\newcommand*{\printGuideDesigC}{\leavevmode\@guideDesigC}
+\newcommand*{\printGuideOrgC}{\leavevmode\@guideOrgC}
+%%Panel Member
+\newcommand*{\printPanelMemberA}{\leavevmode\@panelMemA}
+\newcommand*{\printPanelMemberDesigA}{\leavevmode\@panelMemDesigA}
+\newcommand*{\printPanelMemberB}{\leavevmode\@panelMemB}
+\newcommand*{\printPanelMemberDesigB}{\leavevmode\@panelMemDesigB}
+%%Student Name
+\newcommand*{\printStuNameA}{\leavevmode\@stuNameA}
+\newcommand*{\printStuUSNA}{\leavevmode\@stuUSNA}
+\newcommand*{\printStuNameB}{\leavevmode\@stuNameB}
+\newcommand*{\printStuUSNB}{\leavevmode\@stuUSNB}
+\newcommand*{\printStuNameC}{\leavevmode\@stuNameC}
+\newcommand*{\printStuUSNC}{\leavevmode\@stuUSNC}
+\newcommand*{\printStuNameD}{\leavevmode\@stuNameD}
+\newcommand*{\printStuUSND}{\leavevmode\@stuUSND}
+% Added:Ver 3.6
+%%Project co-ordinator Names
+\newcommand*{\printProjectMemberA}{\leavevmode\@projectMemA}
+\newcommand*{\printProjectMemberDesigA}{\leavevmode\@projectMemDesigA}
+\newcommand*{\printProjectMemberB}{\leavevmode\@projectMemB}
+\newcommand*{\printProjectMemberDesigB}{\leavevmode\@projectMemDesigB}
+\newcommand*{\printProjectMemberC}{\leavevmode\@projectMemC}
+\newcommand*{\printProjectMemberDesigC}{\leavevmode\@projectMemDesigC}
+
+%Added: Ver 3.4
+%Added to count the number of lines used in the title - to adjust the spacing of title page
+%Ref: https://tex.stackexchange.com/questions/528391/count-the-number-of-lines-of-a-long-title-with-a-specific-line-width
+\newcounter{numtitlelines}
+\newcount\titlelines % auxiliary counter
+%\newcommand*{\titlelinescount}[1]{%
+%    \setbox\titlebox=\vbox{\huge\bfseries %Use the setting of title here
+%        #1\unskip\strut\par
+%        \global\titlelines=\the\prevgraf
+%    }
+%    \setcounter{numtitlelines}{\the\titlelines}
+%} % Use \thenumtitlelines to know the count value
+
+%%%%%% Title Page %%%%%%%%%%%
+\renewcommand*{\maketitle}{%
+\begin{titlepage}
+%Added in Ver 3.6 [13/08/2023]
+\NoBgThispage
+\begin{tikzpicture}[remember picture, overlay]
+  \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
+\end{tikzpicture}
+\begin{tikzpicture}[remember picture, overlay]
+  \node[anchor=north east,inner sep=0, fill=white] (image) at ($(current page.north east) + (-0.15in,-0.15in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
+\end{tikzpicture}
+\begin{center}
+\vspace{-1cm}
+{\includegraphics[width=1\textwidth]{Figures/RV_newLogo}\par}
+\vspace{1cm}
+
+{\huge\bfseries\@title\unskip\strut\par \global\titlelines=\the\prevgraf}% To count the number of lines used in the title - to adjust the spacing of title page
+\setcounter{numtitlelines}{\the\titlelines}
+\vspace{1cm}
+{\Large\itshape A \ifMinor Minor \else Major \fi Project Report (\@subCode)\unskip\strut\par}
+\vspace{0.25cm}
+{\Large\bfseries Submitted by,\unskip\strut\par}
+\end{center}
+{\noindent\large\bfseries\@stuNameA\unskip\strut}\hfill{\large\bfseries\@stuUSNA\unskip\strut\par}
+\vspace{0.25cm}
+\ifPG
+\vspace{0.5cm}
+\else
+{\noindent\large\bfseries\@stuNameB\unskip\strut}\hfill{\large\bfseries\@stuUSNB\unskip\strut\par}
+\vspace{0.25cm}
+{\noindent\large\bfseries\@stuNameC\unskip\strut}\hfill{\large\bfseries\@stuUSNC\unskip\strut\par}
+\vspace{0.25cm}
+{\noindent\large\bfseries\@stuNameD\unskip\strut}\hfill{\large\bfseries\@stuUSND\unskip\strut\par}
+\fi
+
+%Updated in Ver 3.4 [4/6/2021]
+\ifGuideNameCUsed
+	\ifnum\value{numtitlelines}>2 %Hope this vl fix the issue.
+		{\vspace{0.25cm}}
+	\else
+		{\vspace{0.5cm}}
+	\fi
+\else
+\vspace{1cm}
+\fi
+
+\begin{center}
+{\Large\bfseries Under the guidance of \unskip\strut\par}
+\end{center}
+
+\ifGuideNameBUsed
+{% Both
+{\noindent\large\bfseries\@guideNameA\unskip\strut}\hfill{\large\bfseries\@guideNameB\unskip\strut\par}
+\vspace{0.1cm}
+{\noindent\large\@guideDesigA\unskip\strut}\hfill{\large\@guideDesigB\unskip\strut\par}
+\vspace{0.1cm}
+{\noindent\large\@guideDeptA\unskip\strut}\hfill{\large\@guideDeptB\unskip\strut\par}
+\vspace{0.1cm}
+{\noindent\large\@guideOrgA\unskip\strut}\hfill{\large\@guideOrgB\unskip\strut\par}
+}
+\else
+{% Internal guide
+\begin{center}
+{\large\bfseries\@guideNameA\unskip\strut\par}
+\vspace{0.1cm}
+{\large\@guideDesigA\unskip\strut\par}
+\vspace{0.1cm}
+{\large\@guideDeptA\unskip\strut\par}
+\vspace{0.1cm}
+{\large\@guideOrgA\unskip\strut\par}
+\end{center}
+}
+\fi
+\ifGuideNameCUsed
+{% 
+\begin{center}
+{\large\bfseries\@guideNameC\unskip\strut\par}
+\vspace{0.1cm}
+{\large\@guideDesigC\unskip\strut\par}
+\vspace{0.1cm}
+{\large\@guideDeptC\unskip\strut\par}
+\vspace{0.1cm}
+{\large\@guideOrgC\unskip\strut\par}
+\end{center}
+}
+\else{
+\vspace{2cm}
+}
+\fi
+
+\begin{center}% May be try use \vbox cmd for equal spacing, but I need to know the better location (lower)
+{\large\bfseries In partial fulfillment of the requirements for the degree of \par}
+\vspace{0.25cm}
+{\large\bfseries \ifPG \@mastersInLF\, \else Bachelor of Engineering \fi in \par}
+\vspace{0.25cm}
+{\ifPG \Large\bfseries \@PGprgName\unskip\strut\par \else \Large\bfseries \@departmentLF\unskip\strut\par \fi}
+\vspace{0.25cm}
+{\Large\bfseries\@acadYear \par}
+\end{center}
+%\end{tcolorbox}
+%\newpage
+%\thispagestyle{empty}
+\end{titlepage}
+}
+
+%%%%%%%%%%%%%%%%%% Page Style %%%%%%%%%%%%%%%%%%%%%%%%
+%
+\fancypagestyle{mplain}{%              
+    \fancyhf{}%                            
+    \renewcommand{\headrulewidth}{0.2pt}%    
+    \renewcommand{\footrulewidth}{0.2pt}%
+    \ifPG
+    \fancyfoot[C] {\@mastersInSF\, in \@PGprgName, Department of \@departmentSF,\space\@acadYear}%
+    \else
+    \fancyfoot[L] {UG\space\ifMinor Minor\else Major\fi\space Project Report}%
+    \fancyfoot[C] {Department of \@departmentSF,\space\@acadYear}%
+    \fi
+    \fancyfoot[R] {\thepage}%
+    \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+}
+\fancypagestyle{emptypg}{%              
+    \fancyhf{}%                            
+    \renewcommand{\headrulewidth}{0.2pt}%    
+    \renewcommand{\footrulewidth}{0.2pt}%
+    \ifPG
+    \fancyfoot[C] {\@mastersInSF\, in \@PGprgName, Department of \@departmentSF,\space\@acadYear}%
+    \fancyfoot[R] {}%
+    \else
+    \fancyfoot[L] {UG\space\ifMinor Minor\else Major\fi\space Project Report}%
+    \fancyfoot[C] {Department of \@departmentSF}%
+    \fancyfoot[R] {\@acadYear}%
+    \fi    
+    \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+}
+\fancypagestyle{fplain}{%              
+    \fancyhf{}%                            
+    \renewcommand{\headrulewidth}{0.2pt}%    
+    \renewcommand{\footrulewidth}{0.2pt}%
+%	\fancyhead[L]{\vrule depth \textheight \toc}%
+    \fancyfoot[C] {\thepage}%
+}
+
+%%%%%%%%%%%%%%%% Section Style %%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {0.1pt }%\@plus 0.1ex \@minus -.05ex}%
+                                   {0.1ex }%\@plus.2ex}%
+                                   {\normalfont\Large\bfseries}}
+\renewcommand\subsection{\@startsection {subsection}{2}{\z@}%
+                                   {-1ex }%\@plus 0.1ex \@minus -.05ex}%
+                                   {0.1ex }%\@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\renewcommand\subsubsection{\@startsection {subsubsection}{3}{\z@}%
+                                   {-1ex }%\@plus 0.1ex \@minus -.05ex}%
+                                   {0.1ex }%\@plus.2ex}%
+                                   {\normalfont\normalsize\bfseries}}								   
+%%%%%%%%%%%%%%%% Chapter Style %%%%%%%%%%%%%%%%%%%%%%%
+% helper macros
+\gdef\thinrule{\rule{\textwidth}{0.4pt}}
+\gdef\mediumrule{\rule{\textwidth}{0.8pt}}
+%% broad positions
+\newif\if@pgone\@pgonefalse
+\newif\if@pgtwo\@pgtwofalse
+\newif\if@left\@leftfalse
+\newif\if@right\@rightfalse
+\newif\if@center\@centerfalse
+\newif\if@leftpgone
+\newif\if@rightpgone
+\newif\if@centerpgone
+\newif\if@leftpgtwo
+\newif\if@rightpgtwo
+\newif\if@centerpgtwo
+%Default values
+\@leftpgonefalse
+\@rightpgonefalse
+\@centerpgonefalse
+\@leftpgtwofalse
+\@rightpgtwofalse
+\@centerpgtwofalse
+% newifs for number position
+\newif\if@lefttitle
+\newif\if@righttitle
+\newif\if@leftname
+\newif\if@rightname
+%
+% Define a family for chapter styling keys
+\pgfkeys{/chapter/.is family}
+\pgfkeys{/schapter/.is family}
+\pgfkeys{/apndx/.is family}
+
+\def\pnrset{\pgfqkeys{/chapter}} %Notice this is pgf q keys
+% We define keys for all major components
+\def\cxset{\pgfqkeys{/schapter}}
+\def\apnset{\pgfqkeys{/apndx}}
+
+\pnrset{%
+  name/.code={\gdef\chaptername{#1}},
+%
+  chapter font-family/.store in=\chapterfontfamily@pnr,
+  chapter font-family/.default=\sffamily,
+  chapter font-weight/.store in=\chapterfontweight@pnr,
+  chapter font-size pgone/.store in=\chapterfontsizepgone@pnr,
+  chapter font-size pgtwo/.store in=\chapterfontsizepgtwo@pnr,
+  chapter color/.store in=\chaptercolor@pnr,
+  chapter color/.default=black,
+  chapter before/.store in=\chapterbefore@pnr,
+  chapter after/.store in=\chapterafter@pnr,
+  %
+  number font-family/.store in=\numberfontfamily@pnr,
+  number font-family/.default=\sffamily,
+  number font-weight/.store in=\numberfontweight@pnr,
+  number font-size pgone/.store in=\numberfontsizepgone@pnr,
+  number font-size pgtwo/.store in=\numberfontsizepgtwo@pnr,
+  number color/.store in=\numbercolor@pnr,
+  number color/.default=black,
+  number before/.store in=\numberbefore@pnr,
+  number after/.store in=\numberafter@pnr,
+  % title keys
+  title font-family/.store in=\titlefontfamily@pnr,
+  title font-family/.default=\rmfamily,
+  title font-weight/.store in=\titlefontweight@pnr,
+  title font-size pgone/.store in=\titlefontsizepgone@pnr,
+  title font-size pgtwo/.store in=\titlefontsizepgtwo@pnr,
+  title color/.store in=\titlefontcolor@pnr,
+  title color/.default=black,
+  title before/.store in=\titlebefore@pnr,
+  title after/.store in=\titleafter@pnr,
+  title beforeskip/.store in=\titlebeforeskip@pnr,
+  title afterskip/.store in=\titleafterskip@pnr,
+  %
+  position pgone/.is choice,
+  position pgone/left/.code={\@leftpgonetrue},
+  position pgone/right/.code={\@rightpgonetrue},
+  position pgone/center/.code={\@centerpgonetrue}, 
+  position pgtwo/.is choice,
+  position pgtwo/left/.code={\@leftpgtwotrue},
+  position pgtwo/right/.code={\@rightpgtwotrue},
+  position pgtwo/center/.code={\@centerpgtwotrue},  
+% numbering options that are required
+  numbering/.is choice,
+  numbering/roman/.code={\gdef\thechapter{\@roman\c@chapter}},
+  numbering/Roman/.code={\gdef\thechapter{\@Roman\c@chapter}},
+  numbering/arabic/.code={\gdef\thechapter{\@arabic\c@chapter}},
+  numbering/none/.code={\gdef\thechapter{}},
+  number dot/.store in=\numberpunctuation@pnr,
+  number position/.is choice,
+  number position/leftname/.code={\@leftnametrue\@rightnamefalse},
+  number position/rightname/.code={\@rightnametrue\@leftnamefalse},
+  number position/absolute/.code={},
+  number position/righttitle/.code={\@righttitletrue},
+  number position/lefttitle/.code={\@lefttitletrue},
+% headers and footers
+  header style/.store in=\headerstyle@pnr,  
+}
+
+\cxset{%
+  % title keys
+  title font-family/.store in=\titlefontfamily@cx,
+  title font-family/.default=\rmfamily,
+  title font-weight/.store in=\titlefontweight@cx,
+  title font-size/.store in=\titlefontsize@cx,
+  title color/.store in=\titlefontcolor@cx,
+  title color/.default=black,
+  title before/.store in=\titlebefore@cx,
+  title after/.store in=\titleafter@cx,
+  title beforeskip/.store in=\titlebeforeskip@cx,
+  title afterskip/.store in=\titleafterskip@cx,
+  %
+  position/.is choice,
+  position/left/.code={\@lefttrue},
+  position/right/.code={\@righttrue},
+  position/center/.code={\@centertrue},
+% headers and footers
+  header style/.store in=\headerstyle@cx,  
+}
+% Appendix pgfkey setup
+% Added to Ver.3.5 [01/09/2021]
+\apnset{%
+  name/.code={\gdef\chaptername{#1}},
+%
+  chapter font-family/.store in=\chapterfontfamily@pnr,
+  chapter font-family/.default=\sffamily,
+  chapter font-weight/.store in=\chapterfontweight@pnr,
+  chapter font-size pgone/.store in=\chapterfontsizepgone@pnr,
+  chapter font-size pgtwo/.store in=\chapterfontsizepgtwo@pnr,
+  chapter color/.store in=\chaptercolor@pnr,
+  chapter color/.default=black,
+  chapter before/.store in=\chapterbefore@pnr,
+  chapter after/.store in=\chapterafter@pnr,
+  %
+  number font-family/.store in=\numberfontfamily@pnr,
+  number font-family/.default=\sffamily,
+  number font-weight/.store in=\numberfontweight@pnr,
+  number font-size pgone/.store in=\numberfontsizepgone@pnr,
+  number font-size pgtwo/.store in=\numberfontsizepgtwo@pnr,
+  number color/.store in=\numbercolor@pnr,
+  number color/.default=black,
+  number before/.store in=\numberbefore@pnr,
+  number after/.store in=\numberafter@pnr,
+  % title keys
+  title font-family/.store in=\titlefontfamily@pnr,
+  title font-family/.default=\rmfamily,
+  title font-weight/.store in=\titlefontweight@pnr,
+  title font-size pgone/.store in=\titlefontsizepgone@pnr,
+  title font-size pgtwo/.store in=\titlefontsizepgtwo@pnr,
+  title color/.store in=\titlefontcolor@pnr,
+  title color/.default=black,
+  title before/.store in=\titlebefore@pnr,
+  title after/.store in=\titleafter@pnr,
+  title beforeskip/.store in=\titlebeforeskip@pnr,
+  title afterskip/.store in=\titleafterskip@pnr,
+  %
+  position pgone/.is choice,
+  position pgone/left/.code={\@leftpgonetrue},
+  position pgone/right/.code={\@rightpgonetrue},
+  position pgone/center/.code={\@centerpgonetrue}, 
+  position pgtwo/.is choice,
+  position pgtwo/left/.code={\@leftpgtwotrue},
+  position pgtwo/right/.code={\@rightpgtwotrue},
+  position pgtwo/center/.code={\@centerpgtwotrue},  
+% numbering options that are required
+  numbering/.is choice,
+  numbering/roman/.code={\gdef\thechapter{\@roman\c@chapter}},
+  numbering/Roman/.code={\gdef\thechapter{\@Roman\c@chapter}},
+  numbering/Alphabet/.code={\gdef\thechapter{\@Alph\c@chapter}}, % Added to Ver.3.5 [01/09/2021]
+  numbering/alphabet/.code={\gdef\thechapter{\@alph\c@chapter}}, % Added to Ver.3.5 [01/09/2021]
+  numbering/arabic/.code={\gdef\thechapter{\@arabic\c@chapter}},
+  numbering/none/.code={\gdef\thechapter{}},
+  number dot/.store in=\numberpunctuation@pnr,
+  number position/.is choice,
+  number position/leftname/.code={\@leftnametrue\@rightnamefalse},
+  number position/rightname/.code={\@rightnametrue\@leftnamefalse},
+  number position/absolute/.code={},
+  number position/righttitle/.code={\@righttitletrue},
+  number position/lefttitle/.code={\@lefttitletrue},
+% headers and footers
+  header style/.store in=\headerstyle@pnr,  
+}
+%% This is the Default Chapter tile setting, if \setdefaults is not called inside documnet
+
+\pnrset{%
+  name={Chapter},
+%
+  chapter font-family=\sffamily,
+  chapter font-weight=\bfseries,
+  chapter font-size pgone=\Huge,
+  chapter font-size pgtwo=\Large,
+  chapter color=gray,
+  chapter before=,%{\leavevmode\par},%need to correct for 0pt
+  chapter after=,%{\leavevmode\par},
+ % 
+  number font-size pgone=\Huge,
+  number font-size pgtwo=\Large,
+  number font-family=\sffamily,
+  number font-weight=\bfseries,
+  number color=\color{gray},
+  number before=,
+  number after=,
+  %
+  title font-family=\rmfamily,
+  title font-weight=\bfseries,
+  title font-size pgone=\Huge,
+  title font-size pgtwo=\Large,
+  title color=\color{purple},
+  title after=,
+  title before=,
+  title afterskip={\vskip0pt},
+  title beforeskip={\vskip0pt},
+  %
+  position pgone=right,
+  position pgtwo=center,
+  %
+  numbering=arabic,
+  number dot=,
+  number position=rightname,
+  %
+  header style=mplain,
+}%\fi
+
+\cxset{%
+  title font-family=\rmfamily,
+  title font-weight=\bfseries,
+  title font-size=\Large,
+  title color=\color{purple},
+  title after=,
+  title before=,
+  title afterskip={\vskip25pt},
+  title beforeskip={\par\par},
+  %
+  position=center,
+  %
+  header style=fplain,
+}
+
+% Redefining the appendix command to suit the pgfkeys setup
+% Added to Ver.3.5 [01/09/2021]
+\gdef\appendix{%
+\setcounter{chapter}{0}
+\apnset{%
+  name={Appendix},
+ %
+  chapter font-family=\sffamily,
+  chapter font-weight=\bfseries,
+  chapter font-size pgone=\Huge,
+  chapter font-size pgtwo=\Large,
+  chapter color=gray,
+  chapter before=,%{\leavevmode\par},%need to correct for 0pt
+  chapter after=,%{\leavevmode\par},
+ % 
+  number font-size pgone=\Huge,
+  number font-size pgtwo=\Large,
+  number font-family=\sffamily,
+  number font-weight=\bfseries,
+  number color=\color{gray},
+  number before=,
+  number after=,
+  %
+  title font-family=\rmfamily,
+  title font-weight=\bfseries,
+  title font-size pgone=\Huge,
+  title font-size pgtwo=\Large,
+  title color=\color{purple},
+  title after=,
+  title before=,
+  title afterskip={\vskip0pt},
+  title beforeskip={\vskip0pt},
+  %
+  position pgone=right,
+  position pgtwo=center,
+  %
+  numbering=Alphabet,
+  number dot=,
+  number position=rightname,
+  %
+  header style=mplain,
+}
+}
+
+\renewcommand\@makechapterhead[2][]{%
+% macro for typesetting the chapter number
+  \def\printnumber{%
+    \numberbefore@pnr
+      {%
+      \numbercolor@pnr
+	  \if@pgone
+	    \numberfontsizepgone@pnr
+	  \fi
+	  \if@pgtwo
+	    \numberfontsizepgtwo@pnr
+	  \fi      
+      \numberfontfamily@pnr
+      \numberfontweight@pnr
+      \thechapter
+      \numberpunctuation@pnr
+      }
+      \numberafter@pnr
+  }%
+% macro for typesetting the chapter name
+  \def\printchaptername{%
+    {
+    \chapterfontfamily@pnr
+    \chapterfontweight@pnr
+    \color{\chaptercolor@pnr}
+	\if@pgone
+	  \chapterfontsizepgone@pnr
+      \chaptername%
+	\fi
+	\if@pgtwo
+	  \chapterfontsizepgtwo@pnr
+      \uppercase\expandafter{\chaptername}%
+	\fi
+	\space
+    }%
+  }%
+% set all keys
+  {%
+	{%1st page
+\clearpage
+\thispagestyle{empty}
+	\@pgonetrue\@pgtwofalse
+    \parindent\z@
+    \normalfont%
+	\vspace*{0.35\paperheight}
+    \ifnum \c@secnumdepth>\m@ne%
+      \if@mainmatter%
+         \chapterbefore@pnr%
+		 \if@leftpgone%
+			\raggedright
+		 \fi%
+		 \if@centerpgone%
+			\centering
+		 \fi%
+		 \if@rightpgone%
+			\raggedleft
+		 \fi%
+         \if@leftname
+            \printnumber
+         \fi%
+         \printchaptername
+         \if@rightname
+            \printnumber
+         \fi%
+         \chapterafter@pnr
+      \fi%
+    \fi%
+     %chapter title
+    \interlinepenalty\@M%
+    \titlebeforeskip@pnr%
+    \titlefontfamily@pnr%
+	\titlefontsizepgone@pnr
+    \titlefontweight@pnr%
+    
+    \titlefontcolor@pnr%
+    %\selectfont%
+    \titlebefore@pnr%
+		{#2}
+    \titleafter@pnr%
+    \par\nobreak%
+% skip after title
+    \titleafterskip@pnr%
+% headers
+    %\thispagestyle{\headerstyle@pnr}%
+   \thispagestyle{emptypg}%
+   }
+   \pagebreak
+   {%2nd page
+   \@pgtwotrue\@pgonefalse
+    \parindent\z@
+    \normalfont%
+    \ifnum \c@secnumdepth>\m@ne%
+      \if@mainmatter%
+         \chapterbefore@pnr%
+		 \if@leftpgtwo%
+			\raggedright
+		 \fi%
+		 \if@centerpgtwo%
+			\centering
+		 \fi%
+		 \if@rightpgtwo%
+			\raggedleft
+		 \fi%
+         \if@leftname
+            \printnumber
+         \fi%
+         {\uppercase\expandafter{\printchaptername}}
+         \if@rightname
+            \printnumber
+         \fi%
+         \chapterafter@pnr
+      \fi%
+    \fi%
+     %chapter title
+    \interlinepenalty\@M%
+    \titlebeforeskip@pnr%
+    \titlefontfamily@pnr%
+    \titlefontweight@pnr%
+    \titlefontsizepgtwo@pnr
+    \titlefontcolor@pnr%
+   % \selectfont%
+    \titlebefore@pnr%
+		{\uppercase\expandafter{#2}}
+    \titleafter@pnr%
+    \par\nobreak%
+% skip after title
+    \titleafterskip@pnr%
+% headers
+    \pagestyle{\headerstyle@pnr}%
+   }
+  }
+}
+
+\renewcommand\@makeschapterhead[2][]{%
+% macro for typesetting the chapter name
+  {%
+    \parindent\z@
+    \normalfont%
+	\if@left%
+		\raggedright%
+	\fi%
+	\if@center%
+		\centering%
+	\fi%
+	\if@right%
+		\raggedleft%
+	\fi%
+	 %chapter title
+    \interlinepenalty\@M%
+    \titlebeforeskip@cx%
+    \titlefontfamily@cx%
+    \titlefontweight@cx%
+    \titlefontsizepgtwo@pnr
+    \titlefontcolor@cx%
+    \selectfont%
+    \titlebefore@cx%
+		{\uppercase\expandafter{#2}}
+    \titleafter@cx%
+    \par\nobreak%
+	% skip after title
+    \titleafterskip@cx%
+% headers
+    \thispagestyle{\headerstyle@cx}% Have to use \this option to apply on the current page
+  }%
+}
+
+%\newcommand*{\indentPara}[1]{\ifthenelse{\equal{#1}{yes}}{\@indenttrue}{\@indentfalse}}
+\endinput
