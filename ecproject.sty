@@ -4,8 +4,10 @@
 % Added: \ifMinor in Ver.3.2
 % Fix: spacing issue for 3 guides & 4 students in Ver.3.4
 % Added: \appendix command support in Ver.3.5
+% Added: \IDPProject with change in color for titles in Ver 3.8
+% Added: \DTLProject cmd. in Ver 3.8, but the document structure needs to be updated accordingly
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ecproject}[2021/09/01 v.3.5 an project report package for RVCE]
+\ProvidesPackage{ecproject}[2025/09/01 v.3.8 an project report package for RVCE]
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
 \RequirePackage{xifthen}
@@ -137,21 +139,13 @@
 \newcommand*{\projectMemberDesigC}[1]{\gdef\@projectMemDesigC{#1}}
 \newcommand*{\@projectMemDesigC}{}
 
-% \let\pgProgram\PGtrue\IDPfalse\DTLfalse\Minorfalse%
 \newcommand*{\pgProgram}{\global\PGtrue}%
 
 \let\DraftCopy\Drfttrue%
 
-% \let\MinorProject\Minortrue\PGfalse\IDPfalse\DTLfalse%
 \newcommand*{\MinorProject}{\global\Minortrue}%
 % Ver: 3.8
-% \let\MinorProject\PGfalse%
-% \let\MinorProject\IDPfalse%
-% \let\MinorProject\DTLfalse%
-
-% \let\IDPProject\IDPtrue\PGfalse\DTLfalse\Minorfalse\GuideNameBUsedfalse\GuideNameCUsedfalse%
 \newcommand*{\IDPProject}{\global\IDPtrue}%
-
 \newcommand*{\DTLProject}{\global\DTLtrue}%
 
 %%%To get the definitions out of package:
@@ -856,13 +850,13 @@
     \thispagestyle{\headerstyle@cx}% Have to use \this option to apply on the current page
   }%
 }
+% Added in Ver 3.8: For checking whether more than one mutual exclusive commands are uncommented
 \AtBeginDocument{
-  % \ifdefined\IDPProject{
+
   \ifIDP
     \PackageInfo{ecproject}{You have used \string\IDPProject, checking for any undesired uncomment of commands....}
     \pnrset{title color=\color{black}}
 	  \cxset{title color=\color{black}}
-    % \ifdefined\DTLProject
     \ifDTL
       \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
@@ -872,9 +866,8 @@
     \ifPG
       \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
-  % }\fi
   \fi
-  % \ifdefined\DTLProject{
+
   \ifDTL
     \PackageInfo{ecproject}{You have used \string\DTLProject, checking for any undesired uncomment of commands....}
     \ifIDP
@@ -887,8 +880,7 @@
       \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
-  % }\fi
-  % \ifdefined\MinorProject{
+
   \ifMinor
     \PackageInfo{ecproject}{You have used \string\MinorProject, checking for any undesired uncomment of commands....}
     \ifDTL
@@ -898,8 +890,7 @@
       \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\MinorProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
-  % }\fi
-  % \ifdefined\pgProgram{
+
   \ifPG
     \PackageInfo{ecproject}{You have used \string\pgProgram, checking for any undesired uncomment of commands....}
     \ifDTL
@@ -909,7 +900,6 @@
       \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\pgProgram.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
-  % }\fi
 }
 %\newcommand*{\indentPara}[1]{\ifthenelse{\equal{#1}{yes}}{\@indenttrue}{\@indentfalse}}
 \endinput
