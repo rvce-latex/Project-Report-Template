@@ -1,7 +1,33 @@
 # RVCE-Latex-Project-Report-Template
 This is a Latex template is only for RV College of Engineering students for their report writing in latex. You can use this template for both UG and PG mini/major project report writing in Latex.
 
-The template, by defalut generates UG main project.
+The template, by defalut generates **UG Major project**.
+
+The following is the list of commands, which are used to generate the reports apart from **UG Major project**. You have to uncomment (with *precaution*) to generate:
+1. UG Minor project report
+2. PG Major project report
+3. PG Minor project report
+4. Interdisciplinary project report
+5. Design thinking lab report (not fully supported).
+
+### Errors when uncommenting mutually exclusive commands
+* You should not uncomment `\DTLProject` with `\pgProgram`
+* You should not uncomment `\DTLProject` with `\MinorProject` (or in combination with `\pgProgram`)
+* You should not uncomment `\IDPProject` with `\pgProgram`
+* You should not uncomment `\IDPProject` with `\MinorProject` (or in combination with `\pgProgram`)
+* You should not uncomment `\IDPProject` with `\DTLProject` or vice-versa
+
+>>Note: `\DTLProject` is not fully supported yet.
+
+## Interdisciplinary Project (IDP)
+Uncomment the following command in `Main.tex`
+```
+%\IDPProject
+```
+This settings is used for generating IDP report. 
+
+>>Note: This command is only used for UG students, so if any of the other report generating commands are enabled, you will get an error message stating the exact mutually exclusive commands which were uncommented.
+
 
 ## For PG project report, uncomment the following command in `Main.tex` file
 
