@@ -31,21 +31,14 @@
 \newcommand*{\pgProgramName}[1]{\gdef\@PGprgName{#1} }
 \newcommand*{\@PGprgName}{\texttt{\string\pgProgramName} \texttt{currently not set. Please fix this.}}
 
-% Panel members cmd set
-\newcommand*{\panelMemberA}[1]{\gdef\@panelMemA{#1}}
-\newcommand*{\@panelMemA}{\texttt{\string\panelMemberA} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberDesigA}[1]{\gdef\@panelMemDesigA{#1}}
-\newcommand*{\@panelMemDesigA}{\texttt{\string\panelMemberDesigA} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberB}[1]{\gdef\@panelMemB{#1}}
-\newcommand*{\@panelMemB}{\texttt{\string\panelMemberB} \texttt{currently not set. Please fix this.}}
-\newcommand*{\panelMemberDesigB}[1]{\gdef\@panelMemDesigB{#1}}
-\newcommand*{\@panelMemDesigB}{\texttt{\string\panelMemberDesigB} \texttt{currently not set. Please fix this.}}
-
 % Esteemed members cmd set
 \newcommand*{\HOD}[1]{\gdef\@hod{#1}}
 \newcommand*{\@hod}{\texttt{\string\HOD} \texttt{currently not set. Please fix this.}}
 \newcommand*{\Principal}[1]{\gdef\@principal{#1}}
 \newcommand*{\@principal}{\texttt{\string\Principal} \texttt{currently not set. Please fix this.}}
+% Ver 3.8 : Check \DeanAcademics only if \IDPProject is used
+\newcommand*{\DeanAcademics}[1]{\gdef\@deanAcad{#1}}
+\newcommand*{\VicePrincipal}[1]{\gdef\@vicePrincipal{#1}}
 
 % QR code generator
 \newcommand*{\QRurl}[1]{\gdef\@qrurl{#1}}
@@ -56,6 +49,7 @@
 \newif\ifGuideNameCUsed\GuideNameCUsedfalse
 \newif\ifProjectMemBUsed\ProjectMemBUsedfalse
 \newif\ifProjectMemCUsed\ProjectMemCUsedfalse
+\newif\ifPanelMemBUsed\PanelMemBUsedfalse % Ver 3.8
 \newif\ifStuNameBUsed           % Used to check for more than one student in UG major project
 \newif\ifStuNameCUsed           % ditto
 \newif\ifStuNameDUsed           % ditto
@@ -100,8 +94,10 @@
 \newcommand*{\@guideDesigA}{\texttt{\string\guideDesignationA} \texttt{currently not set. Please fix this.}}
 \newcommand*{\guideOrgA}[1]{\gdef\@guideOrgA{#1}}
 \newcommand*{\@guideOrgA}{\texttt{\string\guideOrgA} \texttt{currently not set. Please fix this.}}
-\newcommand*{\guideDeptA}[1]{\gdef\@guideDeptA{#1}}
-\newcommand*{\@guideDeptA}{\texttt{\string\guideDeptA} \texttt{currently not set. Please fix this.}}
+% Ver 3.8
+\newcommand*{\guideDeptA}[2][ECE]{\gdef\@guideDeptAInSF{#1}\relax \gdef\@guideDeptAInLF{#2}\relax}
+\newcommand*{\@guideDeptAInSF}{\texttt{\string\guideDeptA ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
+\newcommand*{\@guideDeptAInLF}{\texttt{\string\guideDeptA LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
 
 \newcommand*{\guideNameB}[1]{\gdef\@guideNameB{#1}\global\GuideNameBUsedtrue}
 \newcommand*{\@guideNameB}{}
@@ -124,21 +120,46 @@
 
 % Added:Ver 3.6
 % Project Co-ordinates member cmd set
-\newcommand*{\projectMemberA}[1]{\gdef\@projectMemA{#1}}
-\newcommand*{\@projectMemA}{\texttt{\string\projectMemberA} \texttt{currently not set. Please fix this.}}
-\newcommand*{\projectMemberDesigA}[1]{\gdef\@projectMemDesigA{#1}}
-\newcommand*{\@projectMemDesigA}{\texttt{\string\projectMemberDesigA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\projectCoOrdNameA}[1]{\gdef\@projectMemA{#1}}
+\newcommand*{\@projectMemA}{\texttt{\string\projectCoOrdNameA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\projectCoOrdDesigA}[1]{\gdef\@projectMemDesigA{#1}}
+\newcommand*{\@projectMemDesigA}{\texttt{\string\projectCoOrdDesigA} \texttt{currently not set. Please fix this.}}
 
-\newcommand*{\projectMemberB}[1]{\gdef\@projectMemB{#1}\global\ProjectMemBUsedtrue}
+\newcommand*{\projectCoOrdNameB}[1]{\gdef\@projectMemB{#1}\global\ProjectMemBUsedtrue}
 \newcommand*{\@projectMemB}{}
-\newcommand*{\projectMemberDesigB}[1]{\gdef\@projectMemDesigB{#1}}
+\newcommand*{\projectCoOrdDesigB}[1]{\gdef\@projectMemDesigB{#1}}
 \newcommand*{\@projectMemDesigB}{}
 
-\newcommand*{\projectMemberC}[1]{\gdef\@projectMemC{#1}\global\ProjectMemCUsedtrue}
+\newcommand*{\projectCoOrdNameC}[1]{\gdef\@projectMemC{#1}\global\ProjectMemCUsedtrue}
 \newcommand*{\@projectMemC}{}
-\newcommand*{\projectMemberDesigC}[1]{\gdef\@projectMemDesigC{#1}}
+\newcommand*{\projectCoOrdDesigC}[1]{\gdef\@projectMemDesigC{#1}}
 \newcommand*{\@projectMemDesigC}{}
+% Ver 3.8
+\newcommand*{\projectCoOrdDeptA}[2][ECE]{\gdef\@projectCoOrdDeptAInSF{#1}\relax \gdef\@projectCoOrdDeptAInLF{#2}\relax}
+\newcommand*{\@projectCoOrdDeptAInSF}{\texttt{\string\projectCoOrdDeptA ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
+\newcommand*{\@projectCoOrdDeptAInLF}{\texttt{\string\projectCoOrdDeptA LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
+\newcommand*{\projectCoOrdDeptB}[2][ECE]{\gdef\@projectCoOrdDeptBInSF{#1}\relax \gdef\@projectCoOrdDeptBInLF{#2}\relax}
+\newcommand*{\@projectCoOrdDeptBInSF}{\texttt{\string\projectCoOrdDeptB ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
+\newcommand*{\@projectCoOrdDeptBInLF}{\texttt{\string\projectCoOrdDeptB LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
 
+% Panel members cmd set
+\newcommand*{\panelMemberNameA}[1]{\gdef\@panelMemA{#1}}
+\newcommand*{\@panelMemA}{\texttt{\string\panelMemberNameA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberDesigA}[1]{\gdef\@panelMemDesigA{#1}}
+\newcommand*{\@panelMemDesigA}{\texttt{\string\panelMemberDesigA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberNameB}[1]{\gdef\@panelMemB{#1}\global\PanelMemBUsedtrue}
+\newcommand*{\@panelMemB}{\texttt{\string\panelMemberNameB} \texttt{currently not set. Please fix this.}}
+\newcommand*{\panelMemberDesigB}[1]{\gdef\@panelMemDesigB{#1}}
+\newcommand*{\@panelMemDesigB}{\texttt{\string\panelMemberDesigB} \texttt{currently not set. Please fix this.}}
+% Ver 3.8
+\newcommand*{\panelMemberDeptA}[2][ECE]{\gdef\@panelMemDeptAInSF{#1}\relax \gdef\@panelMemDeptAInLF{#2}\relax}
+\newcommand*{\@panelMemDeptAInSF}{\texttt{\string\panelMemberDeptA ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
+\newcommand*{\@panelMemDeptAInLF}{\texttt{\string\panelMemberDeptA LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
+\newcommand*{\panelMemberDeptB}[2][ECE]{\gdef\@panelMemDeptBInSF{#1}\relax \gdef\@panelMemDeptBInLF{#2}\relax}
+\newcommand*{\@panelMemDeptBInSF}{\texttt{\string\panelMemberDeptB ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
+\newcommand*{\@panelMemDeptBInLF}{\texttt{\string\panelMemberDeptB LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
+
+%%% Report Type
 \newcommand*{\pgProgram}{\global\PGtrue}%
 
 \let\DraftCopy\Drfttrue%
@@ -147,6 +168,11 @@
 % Ver: 3.8
 \newcommand*{\IDPProject}{\global\IDPtrue}%
 \newcommand*{\DTLProject}{\global\DTLtrue}%
+
+% Ver 3.8
+\ifIDP
+\newcommand*{\@deanAcad}{\texttt{\string\DeanAcademics} \texttt{currently not set. Please fix this.}}
+\fi
 
 %%%To get the definitions out of package:
 \newcommand*{\printTitle}{\leavevmode\@title}
@@ -161,10 +187,15 @@
 \newcommand*{\printDepartmentLF}{\leavevmode\@departmentLF}
 %% Principal & HOD Name
 \newcommand*{\printPrincipal}{\leavevmode\@principal}
+\newcommand*{\printVicePrincipal}{\leavevmode\@vicePrincipal}
+\newcommand*{\printDA}{\leavevmode\@deanAcad}
 \newcommand*{\printHOD}{\leavevmode\@hod}
 %%Guide Name
 \newcommand*{\printGuideNameA}{\leavevmode\@guideNameA}
 \newcommand*{\printGuideDesigA}{\leavevmode\@guideDesigA}
+% Ver 3.8
+\newcommand*{\printGuideDeptAInSF}{\leavevmode\@guideDeptAInSF}
+\newcommand*{\printGuideDeptAInLF}{\leavevmode\@guideDeptAInLF}
 \newcommand*{\printGuideOrgA}{\leavevmode\@guideOrgA}
 \newcommand*{\printGuideNameB}{\leavevmode\@guideNameB}
 \newcommand*{\printGuideDesigB}{\leavevmode\@guideDesigB}
@@ -177,6 +208,11 @@
 \newcommand*{\printPanelMemberDesigA}{\leavevmode\@panelMemDesigA}
 \newcommand*{\printPanelMemberB}{\leavevmode\@panelMemB}
 \newcommand*{\printPanelMemberDesigB}{\leavevmode\@panelMemDesigB}
+% Ver 3.8
+\newcommand*{\printPanelMemberDeptAInSF}{\leavevmode\@panelMemDeptAInSF}
+\newcommand*{\printPanelMemberDeptAInLF}{\leavevmode\@panelMemDeptAInLF}
+\newcommand*{\printPanelMemberDeptBInSF}{\leavevmode\@panelMemDeptBInSF}
+\newcommand*{\printPanelMemberDeptBInLF}{\leavevmode\@panelMemDeptBInLF}
 %%Student Name
 \newcommand*{\printStuNameA}{\leavevmode\@stuNameA}
 \newcommand*{\printStuUSNA}{\leavevmode\@stuUSNA}
@@ -195,8 +231,11 @@
 %%Project co-ordinator Names
 \newcommand*{\printProjectMemberA}{\leavevmode\@projectMemA}
 \newcommand*{\printProjectMemberDesigA}{\leavevmode\@projectMemDesigA}
+\newcommand*{\printProjectMemberDeptAInSF}{\leavevmode\@projectCoOrdDeptAInSF}
+\newcommand*{\printProjectMemberDeptAInLF}{\leavevmode\@projectCoOrdDeptAInLF}
 \newcommand*{\printProjectMemberB}{\leavevmode\@projectMemB}
 \newcommand*{\printProjectMemberDesigB}{\leavevmode\@projectMemDesigB}
+\newcommand*{\printProjectMemberDeptB}{\leavevmode\@projectCoOrdDeptB}
 \newcommand*{\printProjectMemberC}{\leavevmode\@projectMemC}
 \newcommand*{\printProjectMemberDesigC}{\leavevmode\@projectMemDesigC}
 
@@ -283,7 +322,7 @@
   \vspace{0.1cm}
   {\large\@guideDeptA\unskip\strut\par}
   \vspace{0.1cm}
-  {\large\@guideOrgA\unskip\strut\par}
+  {\large\@guideOrgA\textsuperscript{\small\textregistered}\unskip\strut\par}
   \end{center}
 \else
   \ifIDP
@@ -293,9 +332,9 @@
     \vspace{0.1cm}
     {\large\@guideDesigA\unskip\strut\par}
     \vspace{0.1cm}
-    {\large\@guideDeptA\unskip\strut\par}
+    {\large Dept. of\space\@guideDeptAInSF\unskip\strut\par}
     \vspace{0.1cm}
-    {\large\@guideOrgA\unskip\strut\par}
+    {\large\@guideOrgA\textsuperscript{\small\textregistered}\unskip\strut\par}
     \end{center}
   \else{
     \ifGuideNameBUsed
@@ -304,7 +343,7 @@
     \vspace{0.1cm}
     {\noindent\large\@guideDesigA\unskip\strut}\hfill{\large\@guideDesigB\unskip\strut\par}
     \vspace{0.1cm}
-    {\noindent\large\@guideDeptA\unskip\strut}\hfill{\large\@guideDeptB\unskip\strut\par}
+    {\noindent\large Dept. of\space\@guideDeptAInSF\unskip\strut}\hfill{\large\@guideDeptB\unskip\strut\par}
     \vspace{0.1cm}
     {\noindent\large\@guideOrgA\unskip\strut}\hfill{\large\@guideOrgB\unskip\strut\par}
       \ifGuideNameCUsed
@@ -340,10 +379,14 @@
 \begin{center}% May be try use \vbox cmd for equal spacing, but I need to know the better location (lower)
 {\large\bfseries In partial fulfillment of the requirements for the degree of \par}
 \vspace{0.25cm}
-{\large\bfseries \ifPG \@mastersInLF\, \else Bachelor of Engineering \fi in \par}
+{\large\bfseries \ifPG \@mastersInLF\, \else Bachelor of Engineering \fi in \ifIDP respective departments\fi\par}
 \vspace{0.25cm}
+\ifIDP
+
+\else
 {\ifPG \Large\bfseries \@PGprgName\unskip\strut\par \else \Large\bfseries \@departmentLF\unskip\strut\par \fi}
 \vspace{0.25cm}
+\fi
 {\Large\bfseries\@acadYear \par}
 \end{center}
 %\end{tcolorbox}
@@ -361,26 +404,42 @@
     \ifPG
     \fancyfoot[C] {\@mastersInSF\, in \@PGprgName, Department of \@departmentSF,\space\@acadYear}%
     \else
-    \fancyfoot[L] {\ifMinor UG Minor Project \else \ifIDP Interdisciplinary Project \else \ifDTL Design Thinking Lab \else UG Major Project \fi\fi\fi Report}%
+    \ifIDP
+    \fancyfoot[L] {RV College of Engineering\textsuperscript{\small\textregistered}}%
+    \fancyfoot[C] {\@acadYear}%
+    \else
+    \fancyfoot[L] {\ifMinor UG Minor Project \else \ifDTL Design Thinking Lab \else UG Major Project \fi\fi Report}%
     %\fancyfoot[C] {Department of \@departmentSF \ifIDP \\\@acadYear\else \ifDTL \\\@acadYear\else ,\@acadYear\fi\fi}%
-    \fancyfoot[C] {\ifIDP \hspace{2cm}\else \ifDTL \hspace{2cm}\else \fi\fi Department of \@departmentSF, \@acadYear}%
+    \fancyfoot[C] {\ifDTL \hspace{2cm}\else \fi Department of \@departmentSF, \@acadYear}%
+    \fi
     \fi
     \fancyfoot[R] {\thepage}%
+    \ifIDP
+    \fancyhead[C] {\@title}%
+    \else
     \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+    \fi
 }
 \fancypagestyle{emptypg}{%              
-    \fancyhf{}%                            
-    \renewcommand{\headrulewidth}{0.2pt}%    
+    \fancyhf{}%
+    \ifIDP
+    \renewcommand{\headrulewidth}{0pt}%
+    \else
+    \renewcommand{\headrulewidth}{0.2pt}%
+    \fi
     \renewcommand{\footrulewidth}{0.2pt}%
     \ifPG
     \fancyfoot[C] {\@mastersInSF\, in \@PGprgName, Department of \@departmentSF,\space\@acadYear}%
     \fancyfoot[R] {}%
     \else
     \fancyfoot[L] {\ifMinor UG Minor Project \else \ifIDP Interdisciplinary Project \else \ifDTL Design Thinking Lab \else UG Major Project \fi\fi\fi  Report}%
-    \fancyfoot[C] {Department of \@departmentSF}%
+    \fancyfoot[C] {\ifIDP \else Department of \@departmentSF\fi}%
     \fancyfoot[R] {\@acadYear}%
-    \fi    
+    \fi
+    \ifIDP
+    \else
     \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+    \fi
 }
 \fancypagestyle{fplain}{%              
     \fancyhf{}%                            
