@@ -1,68 +1,97 @@
-%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCE
+%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCEMore actions
 %Border
 \begin{tikzpicture}[remember picture, overlay]
-  \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
+	\draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
 \thispagestyle{empty}
-\vspace{-1cm}
+\vspace{-1.5cm}
 \begin{center}
-\Large\textbf{RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru} \par
-\large{(\textit{Autonomous institution affiliated to VTU, Belagavi})} \par
-\large\textbf{Department of \printDepartmentLF}\\
-.\hspace{2cm}\\
-\includegraphics[width=4cm]{Figures/RV_logoVec}\par
-\Large\textbf{\underline{CERTIFICATE}} \par
+	\Large\textbf{RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru} \\[-0.5em]
+	\large{(\textit{Autonomous institution affiliated to VTU, Belagavi})} \\[-0.5em]
+	\ifIDP \else\large\textbf{Department of \ifIDP \printGuideDeptAInLF\else\printDepartmentLF\fi}\fi
+	\vspace{0.5cm}
+	\includegraphics[width=4cm]{Figures/RV_logoVec}\\
+	\Large\textbf{\underline{CERTIFICATE}} \par
 \end{center}
 %\begin{minipage}[b]{\linewidth}
 %\large
 \begin{spacing}{1.5}
-\noindent Certified that the \ifMinor{minor\;}\else{ major\;}\fi project (\printCode)work titled \textbf{\textit{\printTitle}} is carried out by
-\ifPG{%
-\textbf{\printStuNameA} (\textbf{\printStuUSNA}) who is  bonafide student 
-}
-\else{
-\ifStuNameDUsed{%
-\textbf{\printStuNameA } (\textbf{\printStuUSNA}), \textbf{\printStuNameB } (\textbf{\printStuUSNB}), \textbf{\printStuNameC } (\textbf{\printStuUSNC}) and \textbf{\printStuNameD } (\textbf{\printStuUSND})  who are bonafide students 
-}\else{% 
-\ifStuNameCUsed{%
-\textbf{\printStuNameA } (\textbf{\printStuUSNA}), \textbf{\printStuNameB } (\textbf{\printStuUSNB}) and \textbf{\printStuNameC } (\textbf{\printStuUSNC})  who are bonafide students 
-}\else{%
-\ifStuNameBUsed{%
-\textbf{\printStuNameA} (\textbf{\printStuUSNA}) and \textbf{\printStuNameB} (\textbf{\printStuUSNB})  who are bonafide students 
-}\else{%
-\textbf{\printStuNameA} (\textbf{\printStuUSNA}) who is  bonafide student 
-}
-\fi
-}\fi
-}\fi
-}\fi
-of RV College of Engineering, Bengaluru, in partial fulfillment of the requirements for the degree of  \ifPG \textbf{\printMastersInLF} in \textbf{\printMastersPrgName} \else\textbf{Bachelor of Engineering} in \textbf{\printDepartmentLF} \fi of the Visvesvaraya Technological University, Belagavi during the year \printAcadYear. It is certified that all corrections/suggestions indicated for the Internal Assessment have been incorporated in the \ifMinor{minor\;}\else{major\;}\fi project report deposited in the departmental library. The \ifMinor{minor\;}\else{ major\;}\fi project report has been approved as it satisfies the academic requirements in respect of \ifMinor{minor\;}\else{ major\;}\fi project work prescribed by the institution for the said degree.\\ \par
+	\noindent Certified that the \ifIDP{interdisciplinary\space}\else \ifDTL{design thinking lab\space} \else \ifMinor{minor\space}\else{ major\space}\fi\fi\fi project (\printCode) work titled \textbf{\textit{\printTitle}} is carried out by
+	\ifPG{%
+		\textbf{\printStuNameA} (\textbf{\printStuUSNA}) who is bonafide student 
+	}
+	\else{
+		\ifIDP{
+			\ifStuNameFUsed{%
+				\textbf{\printStuNameA } (\textbf{\printStuUSNA}), \textbf{\printStuNameB } (\textbf{\printStuUSNB}), \textbf{\printStuNameC } (\textbf{\printStuUSNC}), \textbf{\printStuNameD } (\textbf{\printStuUSND}), \textbf{\printStuNameE } (\textbf{\printStuUSNE}) and \textbf{\printStuNameF } (\textbf{\printStuUSNF})  who are bonafide students 
+			}\else{%
+				\ifStuNameEUsed{%
+					\textbf{\printStuNameA } (\textbf{\printStuUSNA}), \textbf{\printStuNameB } (\textbf{\printStuUSNB}), \textbf{\printStuNameC } (\textbf{\printStuUSNC}), \textbf{\printStuNameD } (\textbf{\printStuUSND}) and \textbf{\printStuNameE } (\textbf{\printStuUSNE})  who are bonafide students 
+				}\fi
+			}\fi
+		}\else{%
+			\ifStuNameDUsed{%
+				\textbf{\printStuNameA } (\textbf{\printStuUSNA}), \textbf{\printStuNameB } (\textbf{\printStuUSNB}), \textbf{\printStuNameC } (\textbf{\printStuUSNC}) and \textbf{\printStuNameD } (\textbf{\printStuUSND})  who are bonafide students 
+			}\else{% 
+				\ifStuNameCUsed{%
+					\textbf{\printStuNameA } (\textbf{\printStuUSNA}), \textbf{\printStuNameB } (\textbf{\printStuUSNB}) and \textbf{\printStuNameC } (\textbf{\printStuUSNC})  who are bonafide students 
+				}\else{%
+					\ifStuNameBUsed{%
+						\textbf{\printStuNameA} (\textbf{\printStuUSNA}) and \textbf{\printStuNameB} (\textbf{\printStuUSNB})  who are bonafide students 
+					}\else{%
+						\textbf{\printStuNameA} (\textbf{\printStuUSNA}) who is  bonafide student 
+					}\fi
+				}\fi
+	}\fi
+	}\fi
+	}\fi of RV College of Engineering, Bengaluru, in partial fulfillment of the requirements for the degree of \ifPG \textbf{\printMastersInLF} in \textbf{\printMastersPrgName} \else\textbf{Bachelor of Engineering} in \ifIDP respective departments \else \textbf{\printDepartmentLF} \fi\fi \ifIDP \else of the Visvesvaraya Technological University, Belagavi\space\fi during the year \printAcadYear. It is certified that all corrections/suggestions indicated for the Internal Assessment have been incorporated in the \ifDTL{design thinking lab\space}\else\ifIDP {interdisciplinary project\space}\else\ifMinor{minor project\space}\else{major project\space}\fi\fi\fi report deposited in the departmental library. The \ifDTL{design thinking lab\space} \else \ifIDP {interdisciplinary project\space} \else \ifMinor{minor project\space}\else{major project\space}\fi\fi\fi report has been approved as it satisfies the academic requirements in respect of  \ifDTL{design thinking lab\space}\else\ifIDP {interdisciplinary project\space}\else\ifMinor{minor project\space}\else{major project\space}\fi\fi\fi work prescribed by the institution for the said degree. \par
 \end{spacing}
-
+%\ifStuNameCUsed \vspace{-0.5cm}\fi
+\ifIDP
+\begin{table}[H]
+\centering
+%	\resizebox{1\textwidth}{!}{%
+\begin{tabular}{p{0.4\textwidth}p{0.2\textwidth}p{0.4\textwidth}c}
+	&&&\\
+	&&&\\
+	\centering{\printGuideNameA} & &\centering{\printHOD} &\\
+	\centering{Guide} & & \centering{Head of the Department}& \\
+	& & &\\
+	& & & \\
+	& & & \\
+	\centering{\printDA} &  & \centering{\printPrincipal} &\\
+	\centering{Dean Academics} & & \centering{Principal} &\\
+	&&&\\
+\end{tabular}%
+%	}
+\end{table}
+\else
 \begin{table}[H]
 \centering
 \resizebox{1\textwidth}{!}{%
 \begin{tabular}{ccc}
-\Large &&\\
-\large Guide &\large Head of the Department &\large Principal\\
-& &\\
-\large\printGuideNameA & \large\printHOD & \large\printPrincipal\\
-& & \\
+	\Large &&\\
+	\large Guide &\large Head of the Department &\large Principal\\
+	& &\\
+	& &\\
+	\large\printGuideNameA & \large\printHOD & \large\printPrincipal\\
+	& & \\
 \end{tabular}%
 }
 \end{table}
-
+\fi
+\ifStuNameCUsed \vspace{-0.75cm}\fi
 \begin{table}[H]
 \centering
 %\resizebox{\textwidth}{!}{%
 \begin{tabular}{lccp{6cm}cc}
-&&&\textbf{\Large External Viva}&&\\
-&&&&&\\
-&Name of Examiners &&& & Signature with Date\\
-&&&&&\\
-1.&&&&&\\
-&&&&&\\
-2.&&&&&\\
+	&&&\textbf{\Large External Viva}&&\\
+	
+	&Name of Examiners &&& & Signature with Date\\
+	&&&&&\\
+	1.&&&&&\\
+	&&&&&\\
+	2.&&&&&\\
 \end{tabular}%
 %}
 \end{table}

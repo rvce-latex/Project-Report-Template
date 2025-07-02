@@ -1,31 +1,33 @@
-%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCE.
+%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCE.More actions
 %%Border
 \begin{tikzpicture}[remember picture, overlay]
-  \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
+	\draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
 \thispagestyle{empty}
-
+\ifIDP \vspace{-1cm}\fi
 \begin{center}
-%.\hspace{1cm}\\ \par
-\Large\textbf{\underline{ACKNOWLEDGEMENTS}} \par
+	%.\hspace{1cm}\\ \par
+	\Large\textbf{\underline{ACKNOWLEDGEMENTS}} \par
 \end{center}
 
 \ifPG I am \else
-\ifStuNameBUsed We are \else I am \fi\fi indebted to \ifPG my \else\ifStuNameBUsed our \else my \fi\fi guide, \textbf{\printGuideNameA}, \printGuideDesigA, \printGuideOrgA$\,.$ for the wholehearted support, suggestions and invaluable advice throughout \ifPG my \else\ifStuNameBUsed our \else my \fi\fi project work and also helped in the preparation of this thesis.\\ \par
+\ifStuNameBUsed We are \else I am \fi\fi indebted to \ifPG my \else\ifStuNameBUsed our \else my \fi\fi guide, \textbf{\printGuideNameA}, \printGuideDesigA, Department of \printGuideDeptAInSF, RVCE for the wholehearted support, suggestions and invaluable advice throughout \ifPG my \else\ifStuNameBUsed our \else my \fi\fi project work and also helped in the preparation of this thesis.\\ \par
 
-\ifPG I \else \ifStuNameBUsed We \else I \fi\fi also express our gratitude to \ifPG my \else\ifStuNameBUsed our \else my \fi\fi  panel members \textbf{\printPanelMemberA}, \printPanelMemberDesigA $\,$ and \textbf{\printPanelMemberB}, \printPanelMemberDesigB , Department of \printDepartmentLF\, for their valuable comments and suggestions during the phase evaluations. \\ \par
+\ifPG I \else \ifStuNameBUsed We \else I \fi\fi also express our gratitude to \ifPG my \else\ifStuNameBUsed our \else my \fi\fi  panel member\ifIDP\space\else s \fi\textbf{\printPanelMemberA}, \printPanelMemberDesigA, Department of \printPanelMemberDeptAInSF, RVCE \ifIDP \else and \textbf{\printPanelMemberB}, \printPanelMemberDesigB , Department of \printPanelMemberDeptBInSF, RVCE \fi for \ifPanelMemBUsed the \else their\fi valuable comments and suggestions during the phase evaluations. \\ \par
 
-\ifPG My \else \ifStuNameBUsed Our \else My \fi\fi sincere thanks to the project coordinator\ifProjectMemBUsed s\fi\; \textbf{\printProjectMemberA}\ifProjectMemBUsed \ifProjectMemCUsed,\; \else\; and\; \fi\textbf{\printProjectMemberB} \ifProjectMemCUsed\; and \textbf{\printProjectMemberC} \fi\fi\; for \ifProjectMemBUsed their \else the \fi timely instructions and support in coordinating the project.\\ \par
+\ifPG My \else \ifStuNameBUsed Our \else My \fi\fi sincere thanks to the project coordinator\ifIDP\else\ifProjectMemBUsed s\fi\fi\space \textbf{\printProjectMemberA}, \printPanelMemberDesigA, Department of \printProjectMemberDeptAInSF \ifIDP \space for\space \else\ifProjectMemBUsed \ifProjectMemCUsed,\space \else\space and\space \fi\textbf{\printProjectMemberB}, \printPanelMemberDesigB,  \ifProjectMemCUsed\space and \textbf{\printProjectMemberC} \fi\fi\space for \ifProjectMemBUsed their \else the \fi\fi timely instructions and support in coordinating the project.\\ \par
 
-\ifPG My \else \ifStuNameBUsed Our \else My \fi\fi gratitude to \textbf{Prof. Narashimaraja P} for the organized latex template which made report writing easy and interesting.\\ \par
+\ifPG My \else \ifStuNameBUsed Our \else My \fi\fi gratitude to \textbf{Prof. Narashimaraja P}, Department of ECE, RVCE for the organized latex template which made report writing easy and interesting.\\ \par
 
 
-\ifPG My \else \ifStuNameBUsed Our \else My \fi\fi sincere thanks to \textbf{\printHOD}, Professor and Head, Department of \printDepartmentLF, RVCE for the support and encouragement.\\ \par
+\ifPG My \else \ifStuNameBUsed Our \else My \fi\fi sincere thanks to \textbf{\printHOD}, Professor and Head, Department of \ifIDP \printGuideDeptAInLF\else\printDepartmentLF\fi, RVCE for the support and encouragement.\\ \par
 
-\ifPG I \else \ifStuNameBUsed We \else I \fi\fi express sincere gratitude to our beloved Principal, \textbf{\printPrincipal} for the appreciation towards this project work.\\ \par
+\ifIDP
+We are deeply grateful to \textbf{\printDA}, Professor and Dean Academics, RVCE, for the continuous support in the successful execution of this Interdisciplinary project.
+\\ \par
+\fi
+\ifPG I \else \ifStuNameBUsed We \else I \fi\fi express sincere gratitude to our beloved Professor and Vice Principal, \textbf{\printVicePrincipal}, RVCE and Principal, \textbf{\printPrincipal}, RVCE for the appreciation towards this project work.\\ \par
 
-\ifPG I \else\ifStuNameBUsed We \else I \fi\fi thank all the teaching staff and technical staff of \printDepartmentLF\, department, RVCE for their help.\\ \par 
+\ifIDP \else\ifPG I \else\ifStuNameBUsed We \else I \fi\fi thank all the teaching staff and technical staff of \ifIDP \printGuideDeptAInLF\else\printDepartmentLF\fi\, department, RVCE for their help.\\ \par \fi
 
 Lastly, \ifPG I \else\ifStuNameBUsed we \else I \fi\fi take this opportunity to thank \ifPG my \else\ifStuNameBUsed our \else my \fi\fi family members and friends who provided all the backup support throughout the project work.\\ \par
-
-%\pagebreak

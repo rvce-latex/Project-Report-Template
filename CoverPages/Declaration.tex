@@ -1,58 +1,73 @@
-%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCE
+%%ecproject package is created by P Narashimaraja, Assistant Professor, ECE, RVCEMore actions
 %%Border
 \begin{tikzpicture}[remember picture, overlay]
-  \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
+	\draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
 
 \thispagestyle{empty}
-
+\vspace{-0.75cm}
 \begin{center}
-\Large\textbf{\underline{DECLARATION}} \par
+	\Large\textbf{\underline{DECLARATION}} \par
 \end{center}
 
 
-\noindent \ifPG I \else \ifStuNameBUsed We\else I\fi\fi, \textbf{\printStuNameA} \ifPG \else\ifStuNameBUsed  \ifStuNameCUsed ,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameB} \ifStuNameCUsed  \ifStuNameDUsed ,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameC}$\,$ \ifStuNameDUsed and $\,$ \textbf{\printStuNameD}$\,$ \fi \fi \fi \fi students of \ifPG \ifMinor {third\;} \else {fourth\;} \fi \else \ifMinor{sixth\;}\else{eighth\;}\fi \fi semester \ifPG \printMastersInSF\, in \printMastersPrgName \else B.E.\fi, Department of \printDepartmentLF, RV College of Engineering, Bengaluru, hereby declare that the \ifMinor{minor\;}\else{ major\;}\fi project titled `\textbf{\printTitle}' has been carried out by \ifStuNameBUsed us \else me \fi and submitted in partial fulfilment for the award of degree of \ifPG \textbf{\printMastersInLF} in \textbf{\printMastersPrgName} \else\textbf{Bachelor of Engineering} in \textbf{\printDepartmentLF} \fi during the year \printAcadYear.\\ \par
+\noindent \ifPG I\else \ifStuNameBUsed We\else I\fi\fi, \textbf{\printStuNameA}\ifPG ,$\,$\else\ifStuNameBUsed\ifStuNameCUsed,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameB}\ifStuNameCUsed \ifStuNameDUsed,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameC}\ifStuNameDUsed\ifIDP,$\,$ \else{$\,$ and $\,$}\fi  \textbf{\printStuNameD}\ifIDP\ifStuNameEUsed\ifStuNameFUsed,$\,$ \else{$\,$ and $\,$}\fi \textbf{\printStuNameE}$\,$ \ifStuNameFUsed and $\,$ \textbf{\printStuNameF}$\,$ \fi\fi\fi\fi\fi\fi\fi \ifPG student\space \else \ifStuNameBUsed\space students\space\else\space student\space\fi\fi of \ifPG \ifMinor {third}\else {fourth} \fi\else\ifDTL{fourth}\else\ifIDP{sixth}\else \ifMinor{sixth}\else{eighth}\fi\fi\fi\fi\space semester \ifPG \printMastersInSF\, in \printMastersPrgName \else B.E.\fi, \ifIDP \else Department of \printDepartmentLF,\fi\space RV College of Engineering, Bengaluru, hereby declare that the \ifDTL{design thinking lab\space} \else \ifIDP {interdisciplinary project\space} \else \ifMinor{minor project\space}\else{major project\space}\fi\fi\fi titled `\textbf{\printTitle}' has been carried out by \ifPG me \else \ifStuNameBUsed us \else me \fi\fi and submitted in partial fulfilment for the award of degree of \ifPG \textbf{\printMastersInLF} in \textbf{\printMastersPrgName} \else\textbf{Bachelor of Engineering} in \ifIDP respective departments \else  \textbf{\printDepartmentLF} \fi\fi during the year \printAcadYear.\\ \par
 
 \noindent Further \ifPG I \else\ifStuNameBUsed we \else I \fi \fi declare that the content of the dissertation has not been submitted previously by anybody for the award of any degree or diploma to any other university.\\ \par
 
-\noindent \ifPG I \else\ifStuNameBUsed We \else I \fi \fi also declare that any Intellectual Property Rights generated out of this project carried out at RVCE will be the property of RV College of Engineering, Bengaluru and we will be one of the authors of the same.
+\noindent \ifPG I \else\ifStuNameBUsed We \else I \fi \fi also declare that any Intellectual Property Rights generated out of this project carried out at RVCE will be the property of RV College of Engineering, Bengaluru and \ifPG I \else\ifStuNameBUsed We \else I \fi\fi will be one of the authors of the same.
 
 \vspace{1cm}
 \noindent Place: Bengaluru\par
 \vspace{0.5cm}
 \noindent Date: \par
-
-\vspace{2cm}
+\ifStuNameEUsed \vspace{1cm}
+\else \vspace{2cm}
+\fi
 \begin{table}[H]
 \centering
 %\resizebox{\textwidth}{!}{%
 \begin{tabular}{llcp{5cm}cc}
-&&&&&\\
-&&&&&\\
-&Name  &&& Signature& \\
-&&&&&\\
-1.&\printStuNameA (\printStuUSNA)&&&&\\
-&&&&&\\
-\ifPG% 
-\else%
-\ifStuNameBUsed%
-2.&\printStuNameB (\printStuUSNB)&&&&\\
-&&&&&\\
-\else%
-\fi%
-\ifStuNameCUsed%
-3.&\printStuNameC (\printStuUSNC)&&&&\\
-&&&&&\\
-\else%
-\fi%
-\ifStuNameDUsed%
-4.&\printStuNameD (\printStuUSND)&&&&\\
-&&&&&\\
-\else%
-\fi%
-\fi%
+	&&&&&\\
+	&&&&&\\
+	&Name  &&& Signature& \\
+	&&&&&\\
+	1.&\printStuNameA (\printStuUSNA)&&&&\\
+	&&&&&\\
+	\ifPG% 
+	\else%
+	\ifStuNameBUsed%
+	2.&\printStuNameB (\printStuUSNB)&&&&\\
+	&&&&&\\
+	\else%
+	\fi%
+	\ifStuNameCUsed%
+	3.&\printStuNameC (\printStuUSNC)&&&&\\
+	&&&&&\\
+	\else%
+	\fi%
+	\ifStuNameDUsed%
+	4.&\printStuNameD (\printStuUSND)&&&&\\
+	&&&&&\\
+	\else%
+	\fi%
+	\ifIDP
+	\ifStuNameEUsed%
+	5.&\printStuNameE (\printStuUSNE)&&&&\\
+	&&&&&\\
+	\else%
+	\fi%
+	\fi
+	\ifIDP
+	\ifStuNameFUsed%
+	6.&\printStuNameF (\printStuUSNF)&&&&\\
+	&&&&&\\
+	\else%
+	\fi%
+	\fi
+	\fi%
 \end{tabular}%
 %}
 \end{table}
-%\pagebreak
+	%\pagebreak
 
