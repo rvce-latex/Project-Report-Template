@@ -260,9 +260,15 @@
 \begin{tikzpicture}[remember picture, overlay]
   \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
-\begin{tikzpicture}[remember picture, overlay]
-  \node[anchor=north east,inner sep=0, fill=white] (image) at ($(current page.north east) + (-0.15in,-0.15in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
-\end{tikzpicture}
+\ifIDP
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south east,inner sep=0, fill=white] (image) at ($(current page.south east) + (-0.8in,0.8in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
+  \end{tikzpicture}
+\else
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east,inner sep=0, fill=white] (image) at ($(current page.north east) + (-0.15in,-0.15in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
+  \end{tikzpicture}
+\fi
 \begin{center}
 \vspace{-1cm}
 {\includegraphics[width=1\textwidth]{Figures/RV_newLogo}\par}
