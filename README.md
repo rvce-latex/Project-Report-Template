@@ -46,6 +46,15 @@ This will automatically takes in the values specified in the commands given belo
 ```
  %\MinorProject
 ```
+---
+## For Plagiarism check, uncomment the following command in "Main.tex" file
+```
+ %\EnPlagReport
+```
+Uncomment `\EnPlagReport` line, before plagiarism check to remove Certificate, Declaration, Acknowledgement, ToC and Bibliography pages.
+
+---
+
 ## To add Appendix chapter
 Uncomment the following lines in "Main.tex" file
 ```
