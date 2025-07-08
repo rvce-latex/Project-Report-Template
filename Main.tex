@@ -12,6 +12,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Report Type:
+%%%%%%%%%%%%%%%%%% For Plagiarism Check %%%%%%%%%%%%%%%%%%%%%%%
+%% Uncomment \EnPlagReport line, before plagiarism check to remove Certificate, Declaration, Acknowledgement and TOC pages.
+%\EnPlagReport
+
 %%%%%%%%%%%%%%%%%%%%%% DTL report %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Uncomment \DTLProject line, if the report is for DTL project.
 %\DTLProject
@@ -132,6 +136,9 @@
 \maketitle
 %\pagestyle{empty}
 \newpage
+\ifDrf
+% Remove Certificate, Declaration, Acknowledgement and TOC
+\else
 \begin{spacing}{1.5}
 \input{./CoverPages/Certificate}
 \newpage
@@ -164,7 +171,7 @@
 \printglossary[type=\acronymtype, title= Abbreviations, toctitle=Abbreviations]
 \newpage
 \printglossary[type=symbolList, title= List of Symbols, toctitle=List of Symbols]
-
+\fi
 \mainmatter
 \pagestyle{mplain}
 \glsresetall
@@ -192,9 +199,11 @@
 \input{./Appendix/Apndx}%Appendix Chapter 1
 
 \backmatter
+\ifDrf
+\else
 \clearpage
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography%
-
+\fi
 \end{spacing}
 \end{document}
