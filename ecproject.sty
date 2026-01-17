@@ -6,8 +6,9 @@
 % Added: \appendix command support in Ver.3.5
 % Added: \IDPProject with change in color for titles in Ver 3.8
 % Added: \DTLProject cmd. in Ver 3.8, but the document structure needs to be updated accordingly
+% Added: \InternProject cmd. in Ver 3.9.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ecproject}[2025/06/23 v.3.8 an project report package for RVCE]
+\ProvidesPackage{ecproject}[2026/01/17 v.3.9 an project report package for RVCE]
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
 \RequirePackage{xifthen}
@@ -39,7 +40,7 @@
 % Ver 3.8 : Check \DeanAcademics only if \IDPProject is used
 \newcommand*{\DeanAcademics}[1]{\gdef\@deanAcad{#1}}
 \newcommand*{\VicePrincipal}[1]{\gdef\@vicePrincipal{#1}}
-
+% Ver 3.9 : For COE and 
 % QR code generator
 \newcommand*{\QRurl}[1]{\gdef\@qrurl{#1}}
 \newcommand*{\@qrurl}{\qrset{draft, version=20}}
@@ -60,6 +61,7 @@
 \newif\ifMinor\Minorfalse          % ditto
 \newif\ifIDP\IDPfalse          % Ver 3.8
 \newif\ifDTL\DTLfalse          % Ver 3.8
+\newif\ifINT\INTfalse          % Ver 3.9
 % Students cmd set
 \newcommand*{\stuNameA}[1]{\gdef\@stuNameA{#1}}
 \newcommand*{\@stuNameA}{\texttt{\string\stuNameA} \texttt{currently not set. Please fix this.}}
@@ -142,6 +144,15 @@
 \newcommand*{\@projectCoOrdDeptBInSF}{\texttt{\string\projectCoOrdDeptB ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
 \newcommand*{\@projectCoOrdDeptBInLF}{\texttt{\string\projectCoOrdDeptB LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
 
+% Ver 3.9 (For Internship)
+\newcommand*{\internCoOrdNameA}[1]{\gdef\@internMemA{#1}}
+\newcommand*{\@internMemA}{\texttt{\string\internCoOrdNameA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\internCoOrdDesigA}[1]{\gdef\@internMemDesigA{#1}}
+\newcommand*{\@internMemDesigA}{\texttt{\string\internCoOrdDesigA} \texttt{currently not set. Please fix this.}}
+\newcommand*{\internCoOrdDeptA}[2][ECE]{\gdef\@internCoOrdDeptAInSF{#1}\relax \gdef\@internCoOrdDeptAInLF{#2}\relax}
+\newcommand*{\@internCoOrdDeptAInSF}{\texttt{\string\internCoOrdDeptA ShortForm in not defined.} \texttt{Fix this by placing inside square brackets.}}
+\newcommand*{\@internCoOrdDeptAInLF}{\texttt{\string\internCoOrdDeptA LongForm in not defined.} \texttt{Fix this by placing inside surly brackets.}}
+
 % Panel members cmd set
 \newcommand*{\panelMemberNameA}[1]{\gdef\@panelMemA{#1}}
 \newcommand*{\@panelMemA}{\texttt{\string\panelMemberNameA} \texttt{currently not set. Please fix this.}}
@@ -169,6 +180,8 @@
 % Ver: 3.8
 \newcommand*{\IDPProject}{\global\IDPtrue}%
 \newcommand*{\DTLProject}{\global\DTLtrue}%
+% Ver: 3.9
+\newcommand*{\InternProject}{\global\INTtrue}%
 
 % Ver 3.8
 \ifIDP
@@ -240,6 +253,13 @@
 \newcommand*{\printProjectMemberC}{\leavevmode\@projectMemC}
 \newcommand*{\printProjectMemberDesigC}{\leavevmode\@projectMemDesigC}
 
+% Added:Ver 3.9
+%%Internship co-ordinator Names
+\newcommand*{\printInternMemberA}{\leavevmode\@internMemA}
+\newcommand*{\printInternMemberDesigA}{\leavevmode\@internMemDesigA}
+\newcommand*{\printInternMemberDeptAInSF}{\leavevmode\@internCoOrdDeptAInSF}
+\newcommand*{\printInternMemberDeptAInLF}{\leavevmode\@internCoOrdDeptAInLF}
+
 %Added: Ver 3.4
 %Added to count the number of lines used in the title - to adjust the spacing of title page
 %Ref: https://tex.stackexchange.com/questions/528391/count-the-number-of-lines-of-a-long-title-with-a-specific-line-width
@@ -268,6 +288,9 @@
 \begin{tikzpicture}[remember picture, overlay]
   \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
+\ifINT
+% No QR code
+\else
 \ifIDP
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=south east,inner sep=0, fill=white] (image) at ($(current page.south east) + (-0.8in,0.8in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
@@ -277,15 +300,16 @@
     \node[anchor=north east,inner sep=0, fill=white] (image) at ($(current page.north east) + (-0.15in,-0.15in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
   \end{tikzpicture}
 \fi
+\fi
 \begin{center}
 \vspace{-1cm}
 {\includegraphics[width=1\textwidth]{Figures/RV_newLogo}\par}
 \vspace{1cm}
-
+\ifINT{\Large\itshape Summer Internship Report\par on\par}\fi %Intern
 {\huge\bfseries\@title\unskip\strut\par \global\titlelines=\the\prevgraf}% To count the number of lines used in the title - to adjust the spacing of title page
 \setcounter{numtitlelines}{\the\titlelines}
-\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{0.5cm}\fi\fi
-{\Large\itshape \ifMinor A Minor Project \else \ifDTL A Design Thinking Lab \else \ifIDP An Interdisciplinary Project \else A Major Project \fi\fi\fi  Report\;(\@subCode)\unskip\strut\par}
+\ifINT\vspace{1cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{0.5cm}\fi\fi\fi
+{\Large\itshape \ifINT{\huge\bfseries \@subCode} \else\ifMinor A Minor Project \else \ifDTL A Design Thinking Lab \else \ifIDP An Interdisciplinary Project \else A Major Project \fi\fi\fi  Report\;(\@subCode)\fi\unskip\strut\par}
 % \fi
 \vspace{0.25cm}
 {\Large\bfseries Submitted by,\unskip\strut\par}
@@ -294,6 +318,10 @@
 
 {\noindent\large\bfseries\@stuNameA\unskip\strut}\hfill{\large\bfseries\@stuUSNA\unskip\strut\par}
 \ifIDP\vspace{0.125cm}\else\vspace{0.25cm}\fi
+% Ver 3.9:
+\ifINT
+\vspace{0.5cm}
+\else
 \ifPG
 \vspace{0.5cm}
 \else
@@ -310,12 +338,16 @@
 {\noindent\large\bfseries\@stuNameF\unskip\strut}\hfill{\large\bfseries\@stuUSNF\unskip\strut\par}
 \fi
 \fi
+\fi % Intern
 
 \ifDrf
 % Empty
 \else
 % Exclude GuideC support for IDP in Ver 3.8
 %Updated in Ver 3.4 [4/6/2021]
+\ifINT
+\vspace{1cm}
+\else
 \ifIDP
 \vspace{0.75cm}
 \else
@@ -394,8 +426,9 @@
     }\fi%\ifGuideNameBUsed
   }\fi%\ifIDP
 \fi%\ifDTL
+\fi%\ifINT
 \par.
-\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{1cm}\else\vspace{3cm}\fi\fi
+\ifINT\vspace{1cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{1cm}\else\vspace{3cm}\fi\fi\fi
 \begin{center}% May be try use \vbox cmd for equal spacing, but I need to know the better location (lower)
 {\large\bfseries In partial fulfillment of the requirements for the degree of \par}
 \vspace{0.25cm}
@@ -407,6 +440,7 @@
 {\ifPG \Large\bfseries \@PGprgName\unskip\strut\par \else \Large\bfseries \@departmentLF\unskip\strut\par \fi}
 \vspace{0.25cm}
 \fi
+\ifINT \vspace{3cm} {\large\bfseries \MakeUppercase{Department of \@departmentLF}} \par\vspace{0.5cm}\fi
 {\Large\bfseries\@acadYear \par}
 \end{center}
 \fi % Draft 
@@ -777,138 +811,7 @@
 }
 }
 
-\renewcommand\@makechapterhead[2][]{%
-% macro for typesetting the chapter number
-  \def\printnumber{%
-    \numberbefore@pnr
-      {%
-      \numbercolor@pnr
-	  \if@pgone
-	    \numberfontsizepgone@pnr
-	  \fi
-	  \if@pgtwo
-	    \numberfontsizepgtwo@pnr
-	  \fi      
-      \numberfontfamily@pnr
-      \numberfontweight@pnr
-      \thechapter
-      \numberpunctuation@pnr
-      }
-      \numberafter@pnr
-  }%
-% macro for typesetting the chapter name
-  \def\printchaptername{%
-    {
-    \chapterfontfamily@pnr
-    \chapterfontweight@pnr
-    \color{\chaptercolor@pnr}
-	\if@pgone
-	  \chapterfontsizepgone@pnr
-      \chaptername%
-	\fi
-	\if@pgtwo
-	  \chapterfontsizepgtwo@pnr
-      \uppercase\expandafter{\chaptername}%
-	\fi
-	\space
-    }%
-  }%
-% set all keys
-  {%
-	{%1st page
-\clearpage
-\thispagestyle{empty}
-	\@pgonetrue\@pgtwofalse
-    \parindent\z@
-    \normalfont%
-	\vspace*{0.35\paperheight}
-    \ifnum \c@secnumdepth>\m@ne%
-      \if@mainmatter%
-         \chapterbefore@pnr%
-		 \if@leftpgone%
-			\raggedright
-		 \fi%
-		 \if@centerpgone%
-			\centering
-		 \fi%
-		 \if@rightpgone%
-			\raggedleft
-		 \fi%
-         \if@leftname
-            \printnumber
-         \fi%
-         \printchaptername
-         \if@rightname
-            \printnumber
-         \fi%
-         \chapterafter@pnr
-      \fi%
-    \fi%
-     %chapter title
-    \interlinepenalty\@M%
-    \titlebeforeskip@pnr%
-    \titlefontfamily@pnr%
-	\titlefontsizepgone@pnr
-    \titlefontweight@pnr%
-    
-    \titlefontcolor@pnr%
-    %\selectfont%
-    \titlebefore@pnr%
-		{#2}
-    \titleafter@pnr%
-    \par\nobreak%
-% skip after title
-    \titleafterskip@pnr%
-% headers
-    %\thispagestyle{\headerstyle@pnr}%
-   \thispagestyle{emptypg}%
-   }
-   \pagebreak
-   {%2nd page
-   \@pgtwotrue\@pgonefalse
-    \parindent\z@
-    \normalfont%
-    \ifnum \c@secnumdepth>\m@ne%
-      \if@mainmatter%
-         \chapterbefore@pnr%
-		 \if@leftpgtwo%
-			\raggedright
-		 \fi%
-		 \if@centerpgtwo%
-			\centering
-		 \fi%
-		 \if@rightpgtwo%
-			\raggedleft
-		 \fi%
-         \if@leftname
-            \printnumber
-         \fi%
-         {\uppercase\expandafter{\printchaptername}}
-         \if@rightname
-            \printnumber
-         \fi%
-         \chapterafter@pnr
-      \fi%
-    \fi%
-     %chapter title
-    \interlinepenalty\@M%
-    \titlebeforeskip@pnr%
-    \titlefontfamily@pnr%
-    \titlefontweight@pnr%
-    \titlefontsizepgtwo@pnr
-    \titlefontcolor@pnr%
-   % \selectfont%
-    \titlebefore@pnr%
-		{\uppercase\expandafter{#2}}
-    \titleafter@pnr%
-    \par\nobreak%
-% skip after title
-    \titleafterskip@pnr%
-% headers
-    \pagestyle{\headerstyle@pnr}%
-   }
-  }
-}
+
 
 \renewcommand\@makeschapterhead[2][]{%
 % macro for typesetting the chapter name
@@ -944,52 +847,294 @@
 }
 % Added in Ver 3.8: For checking whether more than one mutual exclusive commands are uncommented
 \AtBeginDocument{
+  % Chapter setting
+  \ifINT
+    \renewcommand\@makechapterhead[2][]{%
+    % macro for typesetting the chapter number
+      \def\printnumber{%
+        \numberbefore@pnr
+          {%
+          \numbercolor@pnr
+          \numberfontsizepgtwo@pnr  
+          \numberfontfamily@pnr
+          \numberfontweight@pnr
+          \thechapter
+          \numberpunctuation@pnr
+          }
+          \numberafter@pnr
+      }%
+    % macro for typesetting the chapter name
+      \def\printchaptername{%
+        {
+        \chapterfontfamily@pnr
+        \chapterfontweight@pnr
+        \color{\chaptercolor@pnr}
+        \chapterfontsizepgtwo@pnr
+          \uppercase\expandafter{\chaptername}%
+      \space
+        }%
+      }%
+    % set all keys
+      {%
+      {%2nd page
+      \@pgtwotrue\@pgonefalse
+        \parindent\z@
+        \normalfont%
+        \ifnum \c@secnumdepth>\m@ne%
+          \if@mainmatter%
+            \chapterbefore@pnr%
+        \if@leftpgtwo%
+          \raggedright
+        \fi%
+        \if@centerpgtwo%
+          \centering
+        \fi%
+        \if@rightpgtwo%
+          \raggedleft
+        \fi%
+            \if@leftname
+                \printnumber
+            \fi%
+            {\uppercase\expandafter{\printchaptername}}
+            \if@rightname
+                \printnumber
+            \fi%
+            \chapterafter@pnr
+          \fi%
+        \fi%
+        %chapter title
+        \interlinepenalty\@M%
+        \titlebeforeskip@pnr%
+        \titlefontfamily@pnr%
+        \titlefontweight@pnr%
+        \titlefontsizepgtwo@pnr
+        \titlefontcolor@pnr%
+      % \selectfont%
+        \titlebefore@pnr%
+        {\uppercase\expandafter{#2}}
+        \titleafter@pnr%
+        \par\nobreak%
+    % skip after title
+        \titleafterskip@pnr%
+    % headers
+        \pagestyle{\headerstyle@pnr}%
+      }
+      }
+    }
+  \else
+    \renewcommand\@makechapterhead[2][]{%
+    % macro for typesetting the chapter number
+      \def\printnumber{%
+        \numberbefore@pnr
+          {%
+          \numbercolor@pnr
+        \if@pgone
+          \numberfontsizepgone@pnr
+        \fi
+        \if@pgtwo
+          \numberfontsizepgtwo@pnr
+        \fi      
+          \numberfontfamily@pnr
+          \numberfontweight@pnr
+          \thechapter
+          \numberpunctuation@pnr
+          }
+          \numberafter@pnr
+      }%
+    % macro for typesetting the chapter name
+      \def\printchaptername{%
+        {
+        \chapterfontfamily@pnr
+        \chapterfontweight@pnr
+        \color{\chaptercolor@pnr}
+      \if@pgone
+        \chapterfontsizepgone@pnr
+          \chaptername%
+      \fi
+      \if@pgtwo
+        \chapterfontsizepgtwo@pnr
+          \uppercase\expandafter{\chaptername}%
+      \fi
+      \space
+        }%
+      }%
+    % set all keys
+      {%
+      {%1st page
+    \clearpage
+    \thispagestyle{empty}
+      \@pgonetrue\@pgtwofalse
+        \parindent\z@
+        \normalfont%
+      \vspace*{0.35\paperheight}
+        \ifnum \c@secnumdepth>\m@ne%
+          \if@mainmatter%
+            \chapterbefore@pnr%
+        \if@leftpgone%
+          \raggedright
+        \fi%
+        \if@centerpgone%
+          \centering
+        \fi%
+        \if@rightpgone%
+          \raggedleft
+        \fi%
+            \if@leftname
+                \printnumber
+            \fi%
+            \printchaptername
+            \if@rightname
+                \printnumber
+            \fi%
+            \chapterafter@pnr
+          \fi%
+        \fi%
+        %chapter title
+        \interlinepenalty\@M%
+        \titlebeforeskip@pnr%
+        \titlefontfamily@pnr%
+      \titlefontsizepgone@pnr
+        \titlefontweight@pnr%
+        
+        \titlefontcolor@pnr%
+        %\selectfont%
+        \titlebefore@pnr%
+        {#2}
+        \titleafter@pnr%
+        \par\nobreak%
+    % skip after title
+        \titleafterskip@pnr%
+    % headers
+        %\thispagestyle{\headerstyle@pnr}%
+      \thispagestyle{emptypg}%
+      }
+      \pagebreak
+      {%2nd page
+      \@pgtwotrue\@pgonefalse
+        \parindent\z@
+        \normalfont%
+        \ifnum \c@secnumdepth>\m@ne%
+          \if@mainmatter%
+            \chapterbefore@pnr%
+        \if@leftpgtwo%
+          \raggedright
+        \fi%
+        \if@centerpgtwo%
+          \centering
+        \fi%
+        \if@rightpgtwo%
+          \raggedleft
+        \fi%
+            \if@leftname
+                \printnumber
+            \fi%
+            {\uppercase\expandafter{\printchaptername}}
+            \if@rightname
+                \printnumber
+            \fi%
+            \chapterafter@pnr
+          \fi%
+        \fi%
+        %chapter title
+        \interlinepenalty\@M%
+        \titlebeforeskip@pnr%
+        \titlefontfamily@pnr%
+        \titlefontweight@pnr%
+        \titlefontsizepgtwo@pnr
+        \titlefontcolor@pnr%
+      % \selectfont%
+        \titlebefore@pnr%
+        {\uppercase\expandafter{#2}}
+        \titleafter@pnr%
+        \par\nobreak%
+    % skip after title
+        \titleafterskip@pnr%
+    % headers
+        \pagestyle{\headerstyle@pnr}%
+      }
+      }
+    }
+  \fi
+  % Errors and Warning settings
+  \ifINT
+    \PackageInfo{ecproject}{You have used \string\INTProject, checking for any undesired uncomment of commands....}
+    \pnrset{title color=\color{black}}
+	  \cxset{title color=\color{black}}
+    \ifIDP
+      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\INTProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
+    \ifDTL
+      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\INTProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \ifINT
+      \PackageError{ecproject}{Can't Use \string\INTProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
+    \fi
+    \ifMinor
+      \PackageError{ecproject}{Can't Use \string\MinorProject\space along with \string\INTProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
+    \ifPG
+      \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\INTProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
+  \fi
 
   \ifIDP
     \PackageInfo{ecproject}{You have used \string\IDPProject, checking for any undesired uncomment of commands....}
     \pnrset{title color=\color{black}}
 	  \cxset{title color=\color{black}}
+    \ifINT
+      \PackageError{ecproject}{Can't Use \string\INTProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
     \ifDTL
-      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
     \ifMinor
-      \PackageError{ecproject}{Can't Use \string\MinorProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\MinorProject\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
     \ifPG
-      \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\IDPProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
 
   \ifDTL
     \PackageInfo{ecproject}{You have used \string\DTLProject, checking for any undesired uncomment of commands....}
+
+    \ifINT
+      \PackageError{ecproject}{Can't Use \string\INTProject\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
     \ifIDP
-      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
     \ifMinor
-      \PackageError{ecproject}{Can't Use \string\MinorProject\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\MinorProject\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
     \ifPG
-      \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\pgProgram\space along with \string\DTLProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
 
   \ifMinor
     \PackageInfo{ecproject}{You have used \string\MinorProject, checking for any undesired uncomment of commands....}
+    \ifINT
+      \PackageError{ecproject}{Can't Use \string\INTProject\space along with \string\MinorProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
     \ifDTL
-      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\MinorProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\MinorProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
     \ifIDP
-      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\MinorProject.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\MinorProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
 
   \ifPG
     \PackageInfo{ecproject}{You have used \string\pgProgram, checking for any undesired uncomment of commands....}
+    \ifINT
+      \PackageError{ecproject}{Can't Use \string\INTProject\space along with \string\pgProject.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+    \fi
     \ifDTL
-      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\pgProgram.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\DTLProject\space along with \string\pgProgram.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
     \ifIDP
-      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\pgProgram.}{Uncomment one of these conditions: \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
+      \PackageError{ecproject}{Can't Use \string\IDPProject\space along with \string\pgProgram.}{Uncomment one of these conditions: \string\INTProject, \string\DTLProject, \string\IDPProject, \string\MinorProject (with option of \string\pgProgram), \string\pgProgram. While other options need to be commented.}
     \fi
   \fi
 }

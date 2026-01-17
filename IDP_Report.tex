@@ -16,21 +16,9 @@
 %% Uncomment \EnPlagReport line, before plagiarism check to remove Certificate, Declaration, Acknowledgement and TOC pages.
 %\EnPlagReport
 
-%%%%%%%%%%%%%%%%%%%%%% DTL report %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Uncomment \DTLProject line, if the report is for DTL project.
-%\DTLProject
-
 %%%%%%%%%%%%%%%%%%%%%% IDP report %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Uncomment \IDPProject line, if the report is for IDP project.
-%\IDPProject
-
-%%%%%%%%%%%%%%%%%%%%% Internship report %%%%%%%%%%%%%%%%%%%%%%%
-%% Uncomment \InternProject line, if the report is for Minor project.
-\InternProject
-
-%%%%%%%%%%%%%%% Minor (or) Major report %%%%%%%%%%%%%%%
-%% Uncomment \MinorProject line, if the report is for Minor project.
-%\MinorProject
+\IDPProject
 
 %%%%%%%%%%%%%%%%%%% For PG program %%%%%%%%%%%%%%%%%%%
 %% Uncomment \pgProgram command and define appropriate values for \MastersIn{} and \pgProgramName{}
@@ -63,16 +51,6 @@
 \guideDeptA[ECE]{Electronics and Communication Engineering}
 \guideOrgA{RV College of Engineering}
 
-%% External Guides (Don't Use for Internship; U have '\projectCoOrdNameA{}' for Internship) %%
-\guideNameB{Dr. Ramavenkateshwaran}
-\guideDesignationB{Assistant Professor}
-\guideDeptB{Dept. of ECE}
-\guideOrgB{RV College of Engineering}
-
-%\guideNameC{Dr. Ramavenkateshwaran}
-%\guideDesignationC{Assistant Professor}
-%\guideDeptC{Dept. of ECE}
-%\guideOrgC{RV College of Engineering}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Esteem members related commands
@@ -85,22 +63,10 @@
 \panelMemberDeptB[ECE]{Electronics and Communication Engineering}
 
 % Added Ver 3.6 & 3.9
-%% Project co-ordinators (for Internal RVCE) & Internship co-ordinators (for COE as well as Internship company Manager or Supervisor)
-\projectCoOrdNameA{Mr. Nikhil BG}
-\projectCoOrdDesigA{Technologist Analog-RF}
-\projectCoOrdDeptA[Signalchip]{Signalchip Innovations Pvt. Ltd.}
-% Not used for IDP and Internship
-\projectCoOrdNameB{Dr. P N Jayanthi}
-\projectCoOrdDesigB{Assistant Professor}
-\projectCoOrdDeptB[ECE]{Electronics and Communication Engineering}
-%\projectCoOrdNameC{Prof. Subramanya K N}
-%\projectCoOrdDesigC{Assistant Professor}
-
-% Added Ver 3.9
-%% Departmental Internship co-ordinator details (internal to RVCE)
-\internCoOrdNameA{Prof. P Narashimaraja}
-\internCoOrdDesigA{Assistant Professor}
-\internCoOrdDeptA[ECE]{Electronics and Communication Engineering}
+%% Project co-ordinators (for Internal RVCE) 
+\projectCoOrdNameA{Dr. Chetana G}
+\projectCoOrdDesigA{Assistant Professor}
+\projectCoOrdDeptA[ECE]{Electronics and Communication Engineering}
 
 %%%%%%%%%%%%%%%%% Esteemed Members %%%%%%%%%%%%%%%%%%
 \HOD{Dr. Ravish Aradhya}
@@ -151,26 +117,18 @@
 \else
 \begin{spacing}{1.5}
 \input{./CoverPages/Certificate}
-\ifINT
-\else
+
 \newpage
 \input{./CoverPages/Declaration}
-\fi
+
 \newpage
-\ifINT
-\input{./CoverPages/Ack_int}
-\else
 \input{./CoverPages/Ack}
-\fi
+
 \newpage
 \pagenumbering{roman}
-\ifINT
-\chapter*{Executive Summary}
-\input{./CoverPages/Summarys}
-\else
+
 \chapter*{Abstract}
 \input{./CoverPages/Abstract}
-\fi
 
 \end{spacing}
 \newpage
@@ -190,9 +148,9 @@
 	\addcontentsline{toc}{chapter}{\listtablename}
 	\listoftables	
 \end{spacing}
-\newpage
+
 \printglossary[type=\acronymtype, title= Abbreviations, toctitle=Abbreviations]
-\newpage
+
 \printglossary[type=symbolList, title= List of Symbols, toctitle=List of Symbols]
 \fi
 \mainmatter
@@ -200,44 +158,22 @@
 \glsresetall
 \begin{spacing}{1.5}
 %Chapter 1 
-\ifINT
-\input{./Chapter1/chapter1-Profile}
-\else
 \input{./Chapter1/chapter1-Intro}
-\fi
 
 %Chapter 2
-\ifINT
-\input{./Chapter2/chapter2-Activity}
-\else
 \input{./Chapter2/chapter2-Funda}
-\fi
 
 %Chapter 3
-\ifINT
-\input{./Chapter3/chapter3-Task}
-\else
 \input{./Chapter3/chapter3-design}
-\fi
 
 %Chapter 4
-\ifINT
-\input{./Chapter4/chapter4-Reflection}
-\else
 \input{./Chapter4/chapter4-implement}
-\fi
 
 %Chapter 5
-\ifINT
-\else
 \input{./Chapter5/chapter5-result}
-\fi
 
 %Chapter 6
-\ifINT
-\else
 \input{./Chapter6/chapter6-conclution}
-\fi
 
 %% Uncomment the following 2 commands to add Appendix chapters
 \appendix

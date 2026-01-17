@@ -1,0 +1,38 @@
+\chapter{Activities of the Department}
+
+Overview of the Functional Unit: In this chapter, students should describe the specific department or team they were embedded in during the internship. While Chapter 1 focused on the entire company, this section focuses on the immediate work environment.
+
+\section{Departmental Role and Objectives}
+Define the primary purpose of your department (e.g., Embedded Systems Team, VLSI Design Group, or Quality Assurance). Explain how this department contributes to the company’s overall product lifecycle.
+
+\section{Technical Infrastructure} 
+Describe the tools, hardware, and software environment used within the department. Mention specific lab equipment, servers, or proprietary software frameworks utilized by the team.
+
+\section{Workflow and Methodologies} 
+Detail the operational processes followed, such as the Software Development Life Cycle (SDLC), Agile Sprints, or hardware testing protocols.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE: This section is meant to teach how to use "Acronyms" and "Glossaries" in the report. 
+% 		So Remove or comment the following section and it's content entirely.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Use of Acronyms and Glossaries}
+Acronyms are nothing but the short form of regular repeated word. Say for example, you have a repeat word "Integrated Circuits" and you want to use a short form for it as "IC". For which you have to first define the word and use it wherever you wanted to refer it.
+
+First, let's look at the definition, which has to be entered in \texttt{Glossaries.tex} under \texttt{CoverPages} directory.
+\begin{verbatim}
+	%\newacronym{<Ref>}{<Short-Form>}{<Expanded word>}
+	\newacronym{ic}{IC}{Integrated Circuits}
+\end{verbatim}
+In order to use the defined acronym, use the commands \verb|\gls{<Ref>}| as shown below
+
+%As an example, call the definition with \verb|\gls{ic}| and the outcome of it is reflected as, \gls{ic}.
+
+Note: For the First time, the expanded form appears along with the Short-form definition inside parenthesis. But when the \verb|\gls{}| is repeated, only Short-form appears inside the parenthesis.
+
+Now, let's look at the definition of symbols. Follow the syntax to define the symbol first, inside \texttt{Glossaries.tex} under \texttt{CoverPages} directory.
+\begin{verbatim}
+	%\newglossaryentry{<Ref>}{name=<Symbol>, description={<description about the symbol>}, type=<List type>}
+	\newglossaryentry{rc}{name=$\tau$, description={Time constant}, type=symbolList}
+\end{verbatim}
+
+%As an example, the rate of change is defined with \verb|\gls{rc}| and the outcome of it is reflected as, the rate of change is defined with \gls{rc}.

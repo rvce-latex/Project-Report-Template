@@ -4,5 +4,17 @@
 Main.*
 !Main.pdf
 !Main.tex
+IDP_Report.*
+!IDP_Report.pdf
+!IDP_Report.tex
+InternshipReport.*
+!InternshipReport.pdf
+!InternshipReport.tex
+MajorProjectReport.*
+!MajorProjectReport.pdf
+!MajorProjectReport.tex
+MinorProjectReport.*
+!MinorProjectReport.pdf
+!MinorProjectReport.tex
 CODE_OF_CONDUCT.md
 
