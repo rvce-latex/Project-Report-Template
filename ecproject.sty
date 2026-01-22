@@ -468,9 +468,14 @@
     \fancyfoot[L] {RV College of Engineering\textsuperscript{\small\textregistered}}%
     \fancyfoot[C] {\@acadYear}%
     \else
+    \ifINT
+    \fancyfoot[L] {\ifPG PG\else UG\fi\space Internship Report} 
+    \fancyfoot[C] {Department of \@departmentSF, \@acadYear}% 
+    \else
     \fancyfoot[L] {\ifMinor UG Minor Project \else \ifDTL Design Thinking Lab \else UG Major Project \fi\fi Report}%
     %\fancyfoot[C] {Department of \@departmentSF \ifIDP \\\@acadYear\else \ifDTL \\\@acadYear\else ,\@acadYear\fi\fi}%
     \fancyfoot[C] {\ifDTL \hspace{2cm}\else \fi Department of \@departmentSF, \@acadYear}%
+    \fi
     \fi
     \fi
     \fancyfoot[R] {\thepage}%
