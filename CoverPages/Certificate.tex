@@ -52,20 +52,20 @@
 	}\fi of RV College of Engineering, Bengaluru, in partial fulfillment of the requirements for the degree of \ifPG \textbf{\printMastersInLF} in \textbf{\printMastersPrgName} \else\textbf{Bachelor of Engineering} in \ifIDP respective departments \else \textbf{\printDepartmentLF} \fi\fi \ifIDP \else of the Visvesvaraya Technological University, Belagavi\space\fi during the year \printAcadYear. It is certified that all corrections/suggestions indicated for the Internal Assessment have been incorporated in the \ifINT{internship\space}\else \ifDTL{design thinking lab\space}\else\ifIDP {interdisciplinary project\space}\else\ifMinor{minor project\space}\else{major project\space}\fi\fi\fi\fi report deposited in the departmental library. The \ifINT{internship\space}\else\ifDTL{design thinking lab\space} \else \ifIDP {interdisciplinary project\space} \else \ifMinor{minor project\space}\else{major project\space}\fi\fi\fi\fi report has been approved as it satisfies the academic requirements in respect of  \ifINT{internship\space}\else\ifDTL{design thinking lab\space}\else\ifIDP {interdisciplinary project\space}\else\ifMinor{minor project\space}\else{major project\space}\fi\fi\fi\fi work prescribed by the institution for the said degree. \par
 \end{spacing}
 %\ifStuNameCUsed \vspace{-0.5cm}\fi
-\ifINT
-\begin{table}[H]
-	\centering
-		\begin{tabular}{lp{6cm}p{3cm}c}
-			\multicolumn{2}{l}{\textbf{Evaluation Members}}&\textbf{\raggedleft Signatures}&\\
-			&&&\\
-			1.&\printPanelMemberA&&\\
-			&&&\\
-			2.&\printPanelMemberB&&\printHOD\\
-			& & & \textbf{Head of the Department}\\
-		\end{tabular}%
-\end{table}
-\vspace{1cm}
-\else
+%\ifINT
+%\begin{table}[H]
+%	\centering
+%		\begin{tabular}{lp{6cm}p{3cm}c}
+%			\multicolumn{2}{l}{\textbf{Evaluation Members}}&\textbf{\raggedleft Signatures}&\\
+%			&&&\\
+%			1.&\printPanelMemberA&&\\
+%			&&&\\
+%			2.&\printPanelMemberB&&\printHOD\\
+%			& & & \textbf{Head of the Department}\\
+%		\end{tabular}%
+%\end{table}
+%\vspace{1cm}
+%\else
 \ifIDP
 \begin{table}[H]
 \centering
@@ -85,6 +85,7 @@
 %	}
 \end{table}
 \else
+\vspace{1cm}
 \begin{table}[H]
 \centering
 \resizebox{1\textwidth}{!}{%
@@ -99,7 +100,7 @@
 }
 \end{table}
 \fi % \ifIDP
-\fi % \ifINT
+%\fi % \ifINT
 \ifStuNameCUsed \vspace{-0.75cm}\fi
 \begin{table}[H]
 \centering

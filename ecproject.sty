@@ -288,9 +288,7 @@
 \begin{tikzpicture}[remember picture, overlay]
   \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
-\ifINT
-% No QR code
-\else
+
 \ifIDP
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=south east,inner sep=0, fill=white] (image) at ($(current page.south east) + (-0.8in,0.8in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
@@ -300,16 +298,16 @@
     \node[anchor=north east,inner sep=0, fill=white] (image) at ($(current page.north east) + (-0.15in,-0.15in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
   \end{tikzpicture}
 \fi
-\fi
+
 \begin{center}
 \vspace{-1cm}
 {\includegraphics[width=1\textwidth]{Figures/RV_newLogo}\par}
 \vspace{1cm}
-\ifINT{\Large\itshape Summer Internship Report\par on\par}\fi %Intern
+%\ifINT{\Large\itshape Summer Internship Report\par on\par}\fi %Intern
 {\huge\bfseries\@title\unskip\strut\par \global\titlelines=\the\prevgraf}% To count the number of lines used in the title - to adjust the spacing of title page
 \setcounter{numtitlelines}{\the\titlelines}
-\ifINT\vspace{1cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{0.5cm}\fi\fi\fi
-{\Large\itshape \ifINT{\huge\bfseries \@subCode} \else\ifMinor A Minor Project \else \ifDTL A Design Thinking Lab \else \ifIDP An Interdisciplinary Project \else A Major Project \fi\fi\fi  Report\;(\@subCode)\fi\unskip\strut\par}
+\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{0.5cm}\fi\fi
+{\Large\itshape \ifINT An Internship \else\ifMinor A Minor Project \else \ifDTL A Design Thinking Lab \else \ifIDP An Interdisciplinary Project \else A Major Project \fi\fi\fi\fi  Report\;(\@subCode)\unskip\strut\par}
 % \fi
 \vspace{0.25cm}
 {\Large\bfseries Submitted by,\unskip\strut\par}
@@ -319,9 +317,9 @@
 {\noindent\large\bfseries\@stuNameA\unskip\strut}\hfill{\large\bfseries\@stuUSNA\unskip\strut\par}
 \ifIDP\vspace{0.125cm}\else\vspace{0.25cm}\fi
 % Ver 3.9:
-\ifINT
-\vspace{0.5cm}
-\else
+%\ifINT
+%\vspace{0.5cm}
+%\else
 \ifPG
 \vspace{0.5cm}
 \else
@@ -338,7 +336,7 @@
 {\noindent\large\bfseries\@stuNameF\unskip\strut}\hfill{\large\bfseries\@stuUSNF\unskip\strut\par}
 \fi
 \fi
-\fi % Intern
+%\fi % Intern
 
 \ifDrf
 % Empty
@@ -346,7 +344,18 @@
 % Exclude GuideC support for IDP in Ver 3.8
 %Updated in Ver 3.4 [4/6/2021]
 \ifINT
-\vspace{1cm}
+\begin{center}
+{\Large\bfseries Under the guidance of \unskip\strut\par}
+\end{center}
+\begin{center}
+  {\large\bfseries\@guideNameA\unskip\strut\par}
+  \vspace{0.1cm}
+  {\large\@guideDesigA\unskip\strut\par}
+  \vspace{0.1cm}
+  {\large Dept. of\space\@guideDeptAInSF\unskip\strut\par}
+  \vspace{0.1cm}
+  {\large\@guideOrgA\textsuperscript{\small\textregistered}\unskip\strut\par}
+\end{center}
 \else
 \ifIDP
 \vspace{0.75cm}
@@ -428,7 +437,7 @@
 \fi%\ifDTL
 \fi%\ifINT
 \par.
-\ifINT\vspace{1cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{1cm}\else\vspace{3cm}\fi\fi\fi
+\ifINT\vspace{3cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{1cm}\else\vspace{3cm}\fi\fi\fi
 \begin{center}% May be try use \vbox cmd for equal spacing, but I need to know the better location (lower)
 {\large\bfseries In partial fulfillment of the requirements for the degree of \par}
 \vspace{0.25cm}
@@ -440,7 +449,7 @@
 {\ifPG \Large\bfseries \@PGprgName\unskip\strut\par \else \Large\bfseries \@departmentLF\unskip\strut\par \fi}
 \vspace{0.25cm}
 \fi
-\ifINT \vspace{3cm} {\large\bfseries \MakeUppercase{Department of \@departmentLF}} \par\vspace{0.5cm}\fi
+%\ifINT \vspace{3cm} {\large\bfseries \@departmentLF\unskip\strut\par} \par\fi
 {\Large\bfseries\@acadYear \par}
 \end{center}
 \fi % Draft 
