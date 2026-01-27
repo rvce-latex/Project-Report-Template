@@ -862,80 +862,80 @@
 % Added in Ver 3.8: For checking whether more than one mutual exclusive commands are uncommented
 \AtBeginDocument{
   % Chapter setting
-  \ifINT
-    \renewcommand\@makechapterhead[2][]{%
-    % macro for typesetting the chapter number
-      \def\printnumber{%
-        \numberbefore@pnr
-          {%
-          \numbercolor@pnr
-          \numberfontsizepgtwo@pnr  
-          \numberfontfamily@pnr
-          \numberfontweight@pnr
-          \thechapter
-          \numberpunctuation@pnr
-          }
-          \numberafter@pnr
-      }%
-    % macro for typesetting the chapter name
-      \def\printchaptername{%
-        {
-        \chapterfontfamily@pnr
-        \chapterfontweight@pnr
-        \color{\chaptercolor@pnr}
-        \chapterfontsizepgtwo@pnr
-          \uppercase\expandafter{\chaptername}%
-      \space
-        }%
-      }%
-    % set all keys
-      {%
-      {%2nd page
-      \@pgtwotrue\@pgonefalse
-        \parindent\z@
-        \normalfont%
-        \ifnum \c@secnumdepth>\m@ne%
-          \if@mainmatter%
-            \chapterbefore@pnr%
-        \if@leftpgtwo%
-          \raggedright
-        \fi%
-        \if@centerpgtwo%
-          \centering
-        \fi%
-        \if@rightpgtwo%
-          \raggedleft
-        \fi%
-            \if@leftname
-                \printnumber
-            \fi%
-            {\uppercase\expandafter{\printchaptername}}
-            \if@rightname
-                \printnumber
-            \fi%
-            \chapterafter@pnr
-          \fi%
-        \fi%
-        %chapter title
-        \interlinepenalty\@M%
-        \titlebeforeskip@pnr%
-        \titlefontfamily@pnr%
-        \titlefontweight@pnr%
-        \titlefontsizepgtwo@pnr
-        \titlefontcolor@pnr%
-      % \selectfont%
-        \titlebefore@pnr%
-        {\uppercase\expandafter{#2}}
-        \titleafter@pnr%
-        \par\nobreak%
-    % skip after title
-        \titleafterskip@pnr%
-    % headers
-        \pagestyle{\headerstyle@pnr}%
-      }
-      }
-    }
-  \else
+  %\ifINT
+  %  \renewcommand\@makechapterhead[2][]{%
+  %  % macro for typesetting the chapter number
+  %    \def\printnumber{%
+  %      \numberbefore@pnr
+  %        {%
+  %        \numbercolor@pnr
+  %        \numberfontsizepgtwo@pnr  
+  %        \numberfontfamily@pnr
+  %        \numberfontweight@pnr
+  %        \thechapter
+  %        \numberpunctuation@pnr
+  %        }
+  %        \numberafter@pnr
+  %    }%
+  %  % macro for typesetting the chapter name
+  %    \def\printchaptername{%
+  %      {
+  %      \chapterfontfamily@pnr
+  %      \chapterfontweight@pnr
+  %      \color{\chaptercolor@pnr}
+  %      \chapterfontsizepgtwo@pnr
+  %        \uppercase\expandafter{\chaptername}%
+  %    \space
+  %      }%
+  %    }%
+  %  % set all keys
+  %    {%
+  %    {%2nd page
+  %    \@pgtwotrue\@pgonefalse
+  %      \parindent\z@
+  %      \normalfont%
+  %      \ifnum \c@secnumdepth>\m@ne%
+  %        \if@mainmatter%
+  %          \chapterbefore@pnr%
+  %      \if@leftpgtwo%
+  %        \raggedright
+  %      \fi%
+  %      \if@centerpgtwo%
+  %        \centering
+  %      \fi%
+  %      \if@rightpgtwo%
+  %        \raggedleft
+  %      \fi%
+  %          \if@leftname
+  %              \printnumber
+  %          \fi%
+  %          {\uppercase\expandafter{\printchaptername}}
+  %          \if@rightname
+  %              \printnumber
+  %          \fi%
+  %          \chapterafter@pnr
+  %        \fi%
+  %      \fi%
+  %      %chapter title
+  %      \interlinepenalty\@M%
+  %      \titlebeforeskip@pnr%
+  %      \titlefontfamily@pnr%
+  %      \titlefontweight@pnr%
+  %      \titlefontsizepgtwo@pnr
+  %      \titlefontcolor@pnr%
+  %    % \selectfont%
+  %      \titlebefore@pnr%
+  %      {\uppercase\expandafter{#2}}
+  %      \titleafter@pnr%
+  %      \par\nobreak%
+  %  % skip after title
+  %      \titleafterskip@pnr%
+  %  % headers
+  %      \pagestyle{\headerstyle@pnr}%
+  %    }
+  %    }
+  %  }
+  %\else
     \renewcommand\@makechapterhead[2][]{%
     % macro for typesetting the chapter number
       \def\printnumber{%
@@ -1068,7 +1068,7 @@
       }
       }
     }
-  \fi
+  %\fi
   % Errors and Warning settings
   \ifINT
     \PackageInfo{ecproject}{You have used \string\INTProject, checking for any undesired uncomment of commands....}
