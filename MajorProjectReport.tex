@@ -4,11 +4,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Document settings
-\title{Design and Analysis of Oversampling ADC}
+\title{Design and Analysis of Oversampling ADC }
 \subCode{XX367P}
 % Note: While using the template for IDP, the \Department cmd is not used (discarded automatically) in IDP. The Certificate page uses \guideDeptA[]{} cmd in IDP.
 \Department[ECE]{Electronics and Communication Engineering}
-\academicYear{2024-25}
+\academicYear{2025-26}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Report Type:
@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%% For PG program %%%%%%%%%%%%%%%%%%%
 %% Uncomment \pgProgram command and define appropriate values for \MastersIn{} and \pgProgramName{}
 
-%\pgProgram%
+\pgProgram%
 \MastersIn[M.Tech]{Master of Technology}
 \pgProgramName{VLSI Design \& Embedded Systems}
 
@@ -33,10 +33,10 @@
 \stuUSNC{1RV22EE007}
 \stuNameD{Bala N}
 \stuUSND{1RV22EC007}
-\stuNameE{Advaith Singh}
-\stuUSNE{1RV22CS012}
-\stuNameF{Arjith Sinha}
-\stuUSNF{1RV22IM013}
+%\stuNameE{Advaith Singh}
+%\stuUSNE{1RV22CS012}
+%\stuNameF{Arjith Sinha}
+%\stuUSNF{1RV22IM013}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Guide Related commands
@@ -53,6 +53,7 @@
 \guideDeptB{Dept. of ECE}
 \guideOrgB{RV College of Engineering}
 
+%% Caution: Under special circumstance, if you want to include 2 external guides (supervisor and manager), ensure that your Title of the report is not longer.
 %\guideNameC{Dr. Ramavenkateshwaran}
 %\guideDesignationC{Assistant Professor}
 %\guideDeptC{Dept. of ECE}
@@ -70,11 +71,11 @@
 
 % Added Ver 3.6 & 3.9
 %% Project co-ordinators 
-\projectCoOrdNameA{Dr. Chetana G}
+\projectCoOrdNameA{Dr.Veena Devi}
 \projectCoOrdDesigA{Assistant Professor}
 \projectCoOrdDeptA[ECE]{Electronics and Communication Engineering}
 % Not used for IDP and Internship
-\projectCoOrdNameB{Dr. P N Jayanthi}
+\projectCoOrdNameB{Prof. R Sindhu Rajendran}
 \projectCoOrdDesigB{Assistant Professor}
 \projectCoOrdDeptB[ECE]{Electronics and Communication Engineering}
 %\projectCoOrdNameC{Prof. Subramanya K N}
@@ -128,15 +129,18 @@
 	% Remove Certificate, Declaration, Acknowledgement and TOC
 	\else
 	\begin{spacing}{1.5}
+		\pagestyle{fempty}
+		\cleardoublepage
 		\input{./CoverPages/Certificate}
 		
-		\newpage
+		\cleardoublepage
 		\input{./CoverPages/Declaration}
 		
-		\newpage
+		\cleardoublepage
 		\input{./CoverPages/Ack}
 		
-		\newpage
+		\cleardoublepage
+%		\newpage
 		\pagenumbering{roman}
 		
 		\chapter*{Abstract}
@@ -189,7 +193,9 @@
 		
 		%% Uncomment the following 2 commands to add Appendix chapters
 		\appendix
-		\input{./Appendix/Apndx}%Appendix Chapter 1
+		\input{./Appendix/ApndxA}%Appendix for Plagiarism
+		\input{./Appendix/ApndxB}%Appendix for Paper publication
+		\input{./Appendix/ApndxC}%Appendix for Codes 
 		
 		\backmatter
 		\ifDrf
