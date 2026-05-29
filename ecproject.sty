@@ -15,7 +15,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{qrcode}
 \RequirePackage{background}
-
+\RequirePackage{changepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand*{\subCode}[1]{\gdef\@subCode{#1}}
 \newcommand*{\@subCode}{\texttt{\string\subCode} \texttt{currently not set. Please fix this.}}
@@ -62,6 +62,7 @@
 \newif\ifIDP\IDPfalse          % Ver 3.8
 \newif\ifDTL\DTLfalse          % Ver 3.8
 \newif\ifINT\INTfalse          % Ver 3.9
+\newif\ifMajor\Majortrue          % Ver 3.9
 % Students cmd set
 \newcommand*{\stuNameA}[1]{\gdef\@stuNameA{#1}}
 \newcommand*{\@stuNameA}{\texttt{\string\stuNameA} \texttt{currently not set. Please fix this.}}
@@ -176,12 +177,12 @@
 % \let\DraftCopy\Drfttrue%
 \newcommand*{\EnPlagReport}{\global\Drftrue}%
 
-\newcommand*{\MinorProject}{\global\Minortrue}%
+\newcommand*{\MinorProject}{\global\Minortrue \global\Majorfalse}%
 % Ver: 3.8
-\newcommand*{\IDPProject}{\global\IDPtrue}%
-\newcommand*{\DTLProject}{\global\DTLtrue}%
+\newcommand*{\IDPProject}{\global\IDPtrue \global\Majorfalse}%
+\newcommand*{\DTLProject}{\global\DTLtrue \global\Majorfalse}%
 % Ver: 3.9
-\newcommand*{\InternProject}{\global\INTtrue}%
+\newcommand*{\InternProject}{\global\INTtrue \global\Majorfalse}%
 
 % Ver 3.8
 \ifIDP
@@ -279,6 +280,115 @@
 %Added in Ver 3.6 [13/08/2023]
 \NoBgThispage
 \ifDrf
+% Empty
+\else
+\ifMajor
+
+% ==========================================
+% PAGE 1: 
+% ==========================================
+ \begin{tikzpicture}[remember picture, overlay]
+	\node[anchor=south east,inner sep=0, fill=white] (image) at ($(current page.south east) + (-0.4in,0.4in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
+	\node[anchor=north,align=center, text width=\textwidth] (dept) at ($(current page.south) + (0in,1in)$) {	{\large\bfseries Department of\space\@departmentSF\unskip\strut\par}
+		{\large\bfseries\@acadYear \par}};
+ \end{tikzpicture}
+ \begin{center}
+ 	\vspace{-2cm}
+ 	{\includegraphics[width=0.3\textwidth]{Figures/RV_logoVec}\par}
+ 	\vspace{0.25cm}
+	{\Large\bfseries RV College of Engineering$^{\small{\textregistered}}$\unskip\strut\par}
+	{\normalsize\bfseries Mysore Road, RV Vidyaniketan Post, Bengaluru - 560059, Karnataka, India\unskip\strut\par}
+	\vspace{0.25cm}
+	{\Large\bfseries\@title\unskip\strut\par \global\titlelines=\the\prevgraf}% To count the number of lines used in the title - to adjust the spacing of title page
+	\setcounter{numtitlelines}{\the\titlelines}
+	\vspace{0.25cm}
+	{\large\bfseries MAJOR PROJECT REPORT\unskip\strut\par}
+	{\large\bfseries (\@subCode)\unskip\strut\par}
+	{\Large\bfseries \vspace{0.5cm} Submitted by,\unskip\strut\par}
+  \end{center}
+  \ifGuideNameCUsed\vspace{0.25cm}\else \vspace{0.5cm}\fi
+  {\noindent\large\bfseries\@stuNameA\unskip\strut}\hfill{\large\bfseries\@stuUSNA\unskip\strut\par}
+  \ifPG
+  \vspace{1cm}
+  \else
+  \vspace{0.25cm}
+  {\noindent\large\bfseries\@stuNameB\unskip\strut}\hfill{\large\bfseries\@stuUSNB\unskip\strut\par}
+  \vspace{0.25cm}
+  {\noindent\large\bfseries\@stuNameC\unskip\strut}\hfill{\large\bfseries\@stuUSNC\unskip\strut\par}
+  \vspace{0.25cm}
+  {\noindent\large\bfseries\@stuNameD\unskip\strut}\hfill{\large\bfseries\@stuUSND\unskip\strut\par}
+  \fi% PG Major
+  \ifGuideNameCUsed
+  \ifnum\value{numtitlelines}>2 %Hope this vl fix the issue.
+  {\vspace{0.125cm}}
+  \else
+  {\vspace{0.25cm}}
+  \fi
+  \else
+  \vspace{1cm}
+  \fi
+  \begin{center}
+  	{\large\itshape Under the guidance of \unskip\strut\par}
+  \end{center}
+  \ifGuideNameBUsed
+  {% Both
+  	{\noindent\large\bfseries\@guideNameA\unskip\strut}\hfill{\large\bfseries\@guideNameB\unskip\strut\par}
+  	\vspace{0.1cm}
+  	{\noindent\large\@guideDesigA\unskip\strut}\hfill{\large\@guideDesigB\unskip\strut\par}
+  	\vspace{0.1cm}
+  	{\noindent\large Dept. of\space\@guideDeptAInSF\unskip\strut}\hfill{\large\@guideDeptB\unskip\strut\par}
+  	\vspace{0.1cm}
+  	{\noindent\large\@guideOrgA\unskip\strut}\hfill{\large\@guideOrgB\unskip\strut\par}
+  	\ifGuideNameCUsed
+  	{% 
+  		\begin{center}
+  			{\large\bfseries\@guideNameC\unskip\strut\par}
+  			\vspace{0.1cm}
+  			{\large\@guideDesigC\unskip\strut\par}
+  			\vspace{0.1cm}
+  			{\large\@guideDeptC\unskip\strut\par}
+  			\vspace{0.1cm}
+  			{\large\@guideOrgC\unskip\strut\par}
+  		\end{center}
+  	}
+  	\fi%\ifGuideNameCUsed
+  }
+  \else
+  {% Internal guide
+  	\begin{center}
+  		{\large\bfseries\@guideNameA\unskip\strut\par}
+  		\vspace{0.1cm}
+  		{\large\@guideDesigA\unskip\strut\par}
+  		\vspace{0.1cm}
+  		{\large Dept. of\space\@guideDeptAInSF\unskip\strut\par}
+  		\vspace{0.1cm}
+  		{\large\@guideOrgA\unskip\strut\par}
+  	\end{center}
+  }\fi%\ifGuideNameBUsed
+  \ifGuideNameCUsed\vspace{0.25cm}\else \ifPG\vspace{3.5cm}\else\vspace{1.125cm}\fi\fi
+  	\begin{center}% May be try use \vbox cmd for equal spacing, but I need to know the better location (lower)
+  		{\large\itshape In partial fulfillment for the award of degree of \par}
+  		\vspace{0.125cm}
+  		{\large\bfseries \ifPG \@mastersInLF\, \else Bachelor of Engineering \fi \par} 
+%  		\vspace{0.1cm}
+  		{in \unskip\strut\par} %respective departments\fi\par}
+%  		\vspace{0.1cm}
+  		{\ifPG \Large\bfseries \@PGprgName\unskip\strut\par \else \Large\bfseries \@departmentLF\unskip\strut\par \fi}
+  		\ifGuideNameCUsed\vspace{0.375cm}\else\vspace{0.5cm}\fi
+%  		{\large\bfseries Department of\space\@departmentSF\unskip\strut\par}
+%  		{\large\bfseries\@acadYear \par}
+  	\end{center}
+  	
+% Force a page break within the titlepage environment
+\clearpage
+\thispagestyle{empty}
+\cleardoublepage
+\fi% Major
+\fi% Draft
+% ==========================================
+% PAGE 2: 
+% ==========================================
+\ifDrf
  \begin{center}
   {\huge\bfseries\@title\unskip\strut\par}
   \vspace{0.4\pdfpageheight}
@@ -286,18 +396,21 @@
  \end{center}
 \else
 \begin{tikzpicture}[remember picture, overlay]
-  \draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
+	\draw[line width = 4pt] ($(current page.north west) + (0.75in,-0.75in)$) rectangle ($(current page.south east) + (-0.75in,0.75in)$);
 \end{tikzpicture}
-
 \ifIDP
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=south east,inner sep=0, fill=white] (image) at ($(current page.south east) + (-0.8in,0.8in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
   \end{tikzpicture}
 \else
+\ifMajor
+% Empty
+\else
   \begin{tikzpicture}[remember picture, overlay]
     \node[anchor=north east,inner sep=0, fill=white] (image) at ($(current page.north east) + (-0.15in,-0.15in)$) {\fbox{\qrcode[hyperlink,height=1.75cm]{\@qrurl}}};
   \end{tikzpicture}
-\fi
+\fi% Major
+\fi% IDP
 
 \begin{center}
 \vspace{-1cm}
@@ -364,10 +477,14 @@
 	\ifnum\value{numtitlelines}>2 %Hope this vl fix the issue.
 		{\vspace{0.125cm}}
 	\else
-		{\vspace{0.5cm}}
+		{\vspace{0.25cm}}
 	\fi
 \else
-\vspace{1cm}
+	\ifnum\value{numtitlelines}>2 %Hope this vl fix the issue.
+	{\vspace{0.25cm}}
+	\else
+	{\vspace{1cm}}
+	\fi
 \fi
 \fi
 
@@ -437,7 +554,8 @@
 \fi%\ifDTL
 \fi%\ifINT
 \par.
-\ifINT\vspace{3cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{1cm}\else\vspace{3cm}\fi\fi\fi
+\ifINT\vspace{3cm}\else\ifIDP\vspace{1cm}\else\ifGuideNameCUsed\vspace{0.125cm}\else\ifnum\value{numtitlelines}>2 %Hope this vl fix the issue.
+{\vspace{1cm}}\else\vspace{3cm}\fi\fi\fi\fi
 \begin{center}% May be try use \vbox cmd for equal spacing, but I need to know the better location (lower)
 {\large\bfseries In partial fulfillment of the requirements for the degree of \par}
 \vspace{0.25cm}
@@ -455,7 +573,8 @@
 \fi % Draft 
 %\end{tcolorbox}
 %\newpage
-%\thispagestyle{empty}
+\thispagestyle{empty}
+
 \end{titlepage}
 }
 
@@ -481,17 +600,23 @@
     \fancyfoot[L] {\ifPG PG\else UG\fi\space Internship Report} 
     \fancyfoot[C] {Department of \@departmentSF, \@acadYear}% 
     \else
-    \fancyfoot[L] {\ifMinor UG Minor Project \else \ifDTL Design Thinking Lab \else UG Major Project \fi\fi Report}%
+    \fancyfoot[L] {\ifMinor UG Minor Project Report\else \ifDTL Design Thinking Lab Report\else Department of \@departmentSF \fi\fi }%
     %\fancyfoot[C] {Department of \@departmentSF \ifIDP \\\@acadYear\else \ifDTL \\\@acadYear\else ,\@acadYear\fi\fi}%
-    \fancyfoot[C] {\ifDTL \hspace{2cm}\else \fi Department of \@departmentSF, \@acadYear}%
+    \fancyfoot[C] {\ifDTL \hspace{2cm}\else \fi \@acadYear}%
     \fi
     \fi
     \fi
-    \fancyfoot[R] {\thepage}%
+    \fancyfoot[R]{\thepage}%
     \ifIDP
-    \fancyhead[C] {\@title}%
+    \fancyhead[C]{\@title}%
     \else
-    \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+%    \if@twoside
+%    	\fancyhead[CE]{\@title}%
+%    	\fancyhead[CO]{\nouppercase{\leftmark}}%
+%	\else
+%    	\fancyhead[C]{\nouppercase{\leftmark}}%
+%    \fi
+	\fancyhead[C]{\@title}%
     \fi
     \fi
 }
@@ -518,7 +643,8 @@
     \fi
     \ifIDP
     \else
-    \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+%    \fancyhead[C] {RV College of Engineering\textsuperscript{\small\textregistered}, Bengaluru - 560059}%
+    \fancyhead[C] {\@title}%
     \fi
     \fi
 }
@@ -528,6 +654,13 @@
     \renewcommand{\footrulewidth}{0.2pt}%
 %	\fancyhead[L]{\vrule depth \textheight \toc}%
     \fancyfoot[C] {\thepage}%
+}
+\fancypagestyle{fempty}{%              
+    \fancyhf{}%                            
+    \renewcommand{\headrulewidth}{0pt}%    
+    \renewcommand{\footrulewidth}{0pt}%
+%	\fancyhead[L]{\vrule depth \textheight \toc}%
+%    \fancyfoot[C] {\thepage}%
 }
 
 %%%%%%%%%%%%%%%% Section Style %%%%%%%%%%%%%%%%%%%%%%%
@@ -826,7 +959,6 @@
 }
 
 
-
 \renewcommand\@makeschapterhead[2][]{%
 % macro for typesetting the chapter name
   {%
@@ -862,167 +994,96 @@
 % Added in Ver 3.8: For checking whether more than one mutual exclusive commands are uncommented
 \AtBeginDocument{
   % Chapter setting
-  %\ifINT
-  %  \renewcommand\@makechapterhead[2][]{%
-  %  % macro for typesetting the chapter number
-  %    \def\printnumber{%
-  %      \numberbefore@pnr
-  %        {%
-  %        \numbercolor@pnr
-  %        \numberfontsizepgtwo@pnr  
-  %        \numberfontfamily@pnr
-  %        \numberfontweight@pnr
-  %        \thechapter
-  %        \numberpunctuation@pnr
-  %        }
-  %        \numberafter@pnr
-  %    }%
-  %  % macro for typesetting the chapter name
-  %    \def\printchaptername{%
-  %      {
-  %      \chapterfontfamily@pnr
-  %      \chapterfontweight@pnr
-  %      \color{\chaptercolor@pnr}
-  %      \chapterfontsizepgtwo@pnr
-  %        \uppercase\expandafter{\chaptername}%
-  %    \space
-  %      }%
-  %    }%
-  %  % set all keys
-  %    {%
-  %    {%2nd page
-  %    \@pgtwotrue\@pgonefalse
-  %      \parindent\z@
-  %      \normalfont%
-  %      \ifnum \c@secnumdepth>\m@ne%
-  %        \if@mainmatter%
-  %          \chapterbefore@pnr%
-  %      \if@leftpgtwo%
-  %        \raggedright
-  %      \fi%
-  %      \if@centerpgtwo%
-  %        \centering
-  %      \fi%
-  %      \if@rightpgtwo%
-  %        \raggedleft
-  %      \fi%
-  %          \if@leftname
-  %              \printnumber
-  %          \fi%
-  %          {\uppercase\expandafter{\printchaptername}}
-  %          \if@rightname
-  %              \printnumber
-  %          \fi%
-  %          \chapterafter@pnr
-  %        \fi%
-  %      \fi%
-  %      %chapter title
-  %      \interlinepenalty\@M%
-  %      \titlebeforeskip@pnr%
-  %      \titlefontfamily@pnr%
-  %      \titlefontweight@pnr%
-  %      \titlefontsizepgtwo@pnr
-  %      \titlefontcolor@pnr%
-  %    % \selectfont%
-  %      \titlebefore@pnr%
-  %      {\uppercase\expandafter{#2}}
-  %      \titleafter@pnr%
-  %      \par\nobreak%
-  %  % skip after title
-  %      \titleafterskip@pnr%
-  %  % headers
-  %      \pagestyle{\headerstyle@pnr}%
-  %    }
-  %    }
-  %  }
-  %\else
-    \renewcommand\@makechapterhead[2][]{%
-    % macro for typesetting the chapter number
-      \def\printnumber{%
-        \numberbefore@pnr
-          {%
-          \numbercolor@pnr
-        \if@pgone
-          \numberfontsizepgone@pnr
-        \fi
-        \if@pgtwo
-          \numberfontsizepgtwo@pnr
-        \fi      
-          \numberfontfamily@pnr
-          \numberfontweight@pnr
-          \thechapter
-          \numberpunctuation@pnr
-          }
-          \numberafter@pnr
-      }%
-    % macro for typesetting the chapter name
-      \def\printchaptername{%
-        {
-        \chapterfontfamily@pnr
-        \chapterfontweight@pnr
-        \color{\chaptercolor@pnr}
-      \if@pgone
-        \chapterfontsizepgone@pnr
-          \chaptername%
-      \fi
-      \if@pgtwo
-        \chapterfontsizepgtwo@pnr
-          \uppercase\expandafter{\chaptername}%
-      \fi
-      \space
-        }%
-      }%
-    % set all keys
-      {%
-      {%1st page
-    \clearpage
-    \thispagestyle{empty}
-      \@pgonetrue\@pgtwofalse
-        \parindent\z@
-        \normalfont%
-      \vspace*{0.35\paperheight}
-        \ifnum \c@secnumdepth>\m@ne%
-          \if@mainmatter%
-            \chapterbefore@pnr%
-        \if@leftpgone%
-          \raggedright
-        \fi%
-        \if@centerpgone%
-          \centering
-        \fi%
-        \if@rightpgone%
-          \raggedleft
-        \fi%
-            \if@leftname
-                \printnumber
-            \fi%
-            \printchaptername
-            \if@rightname
-                \printnumber
-            \fi%
-            \chapterafter@pnr
-          \fi%
-        \fi%
-        %chapter title
-        \interlinepenalty\@M%
-        \titlebeforeskip@pnr%
-        \titlefontfamily@pnr%
-      \titlefontsizepgone@pnr
-        \titlefontweight@pnr%
-        
-        \titlefontcolor@pnr%
-        %\selectfont%
-        \titlebefore@pnr%
-        {#2}
-        \titleafter@pnr%
-        \par\nobreak%
-    % skip after title
-        \titleafterskip@pnr%
-    % headers
-        %\thispagestyle{\headerstyle@pnr}%
-      \thispagestyle{emptypg}%
-      }
-      \pagebreak
+%  % For using chapter name as header without Chapter #.
+%  \renewcommand{\chaptermark}[1]{%
+%	\markboth{#1}{}%
+%  }
+  \renewcommand\@makechapterhead[2][]{%
+  	% macro for typesetting the chapter number
+  	\def\printnumber{%
+  		\numberbefore@pnr
+  		{%
+  			\numbercolor@pnr
+  			\if@pgone
+  			\numberfontsizepgone@pnr
+  			\fi
+  			\if@pgtwo
+  			\numberfontsizepgtwo@pnr
+  			\fi      
+  			\numberfontfamily@pnr
+  			\numberfontweight@pnr
+  			\thechapter
+  			\numberpunctuation@pnr
+  		}
+  		\numberafter@pnr
+  	}%
+  	% macro for typesetting the chapter name
+  	\def\printchaptername{%
+  		{
+  			\chapterfontfamily@pnr
+  			\chapterfontweight@pnr
+  			\color{\chaptercolor@pnr}
+  			\if@pgone
+  			\chapterfontsizepgone@pnr
+  			\chaptername%
+%  			\vspace*{0.35\paperheight}
+  			\fi
+  			\if@pgtwo
+  			\chapterfontsizepgtwo@pnr
+  			\uppercase\expandafter{\chaptername}%
+%  			\vspace*{0.05\textwidth}
+  			\fi
+  			\space
+  		}%
+  	}%
+  	% set all keys
+  	{%
+  		{% 1st page
+  			\clearpage
+  			\thispagestyle{empty}
+  			\@pgonetrue\@pgtwofalse
+  			\parindent\z@
+  			\normalfont%
+  			\if@twoside
+  			\vspace*{0.325\paperheight}% ADDED in Ver 3.9
+  			\else
+  			\vspace*{0.35\paperheight}% ADDED in Ver 3.9
+  			\fi
+  				\ifnum \c@secnumdepth>\m@ne%
+  				\if@mainmatter%
+  				\chapterbefore@pnr%
+  				\if@leftpgone\raggedright\fi%
+  				\if@centerpgone\centering\fi%
+  				\if@rightpgone\raggedleft\fi%
+  				\if@leftname\printnumber\fi%
+  				\printchaptername
+  				\if@rightname\printnumber\fi%
+  				\chapterafter@pnr
+  				
+  				\fi%
+  				\fi%
+  				%chapter title
+  				\interlinepenalty\@M%
+  				\titlebeforeskip@pnr%
+  				\titlefontfamily@pnr%
+  				\titlefontsizepgone@pnr
+  				\titlefontweight@pnr%
+  				\titlefontcolor@pnr%
+  				\titlebefore@pnr%
+  				{#2}
+  				\titleafter@pnr%
+  				\par\nobreak%
+  				\if@twoside
+  					\vspace*{0.325\paperheight}% ADDED in Ver 3.9
+  				\else
+  				
+  				\fi
+  			\titleafterskip@pnr%
+  			\thispagestyle{emptypg}%
+  		}
+%  		\pagebreak
+  		\cleardoublepage
+%  		\pagebreak
       {%2nd page
       \@pgtwotrue\@pgonefalse
         \parindent\z@
@@ -1068,7 +1129,7 @@
       }
       }
     }
-  %\fi
+
   % Errors and Warning settings
   \ifINT
     \PackageInfo{ecproject}{You have used \string\INTProject, checking for any undesired uncomment of commands....}
